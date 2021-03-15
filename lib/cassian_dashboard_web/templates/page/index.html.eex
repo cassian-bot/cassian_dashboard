@@ -1,38 +1,13 @@
-<section class="phx-hero">
-  <h1><%= gettext "Welcome to %{name}!", name: "Phoenix" %></h1>
-  <p>Peace of mind from prototype to production</p>
-</section>
-
-<section class="row">
-  <article class="column">
-    <h2>Resources</h2>
-    <ul>
-      <li>
-        <a href="https://hexdocs.pm/phoenix/overview.html">Guides &amp; Docs</a>
-      </li>
-      <li>
-        <a href="https://github.com/phoenixframework/phoenix">Source</a>
-      </li>
-      <li>
-        <a href="https://github.com/phoenixframework/phoenix/blob/v1.5/CHANGELOG.md">v1.5 Changelog</a>
-      </li>
-    </ul>
-  </article>
-  <article class="column">
-    <h2>Help</h2>
-    <ul>
-      <li>
-        <a href="https://elixirforum.com/c/phoenix-forum">Forum</a>
-      </li>
-      <li>
-        <a href="https://webchat.freenode.net/?channels=elixir-lang">#elixir-lang on Freenode IRC</a>
-      </li>
-      <li>
-        <a href="https://twitter.com/elixirphoenix">Twitter @elixirphoenix</a>
-      </li>
-      <li>
-        <a href="https://elixir-slackin.herokuapp.com/">Elixir on Slack</a>
-      </li>
-    </ul>
-  </article>
+<section>
+  <div class="bot-landing">
+    <div class="bot-description">
+      <h1>Cassian</h1>
+      <span>A Discord music bot written in <a href="https://elixir-lang.org/" target="_blank" class="underline-link elixir-underline">Elixir</a>.</span>
+      <p>A music bot allowing you to import, play, save, share, store, listen to, and mess around with public and private playlists from Spotify and YouTube.</p>
+      <a href="#invite"><button class="button button-discord button-invite">Add me to your server!</button></a>
+    </div>
+    <div class="bot-image">
+      <img src="images/bot.jpg" alt="bot-image">
+  </div>
+  </div>
 </section>
