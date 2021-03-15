@@ -19,6 +19,12 @@ defmodule CassianDashboardWeb.Router do
     get "/", PageController, :index
   end
 
+  scope "/commands", CassianDashboardWeb do
+    pipe_through :browser
+
+    get "/", CommandsController, :index
+  end
+
   # Other scopes may use custom stacks.
   # scope "/api", CassianDashboardWeb do
   #   pipe_through :api
