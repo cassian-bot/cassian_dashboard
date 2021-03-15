@@ -7,7 +7,7 @@
       <a href="#invite"><button class="button button-discord button-invite">Add me to your server!</button></a>
     </div>
     <div class="bot-image">
-      <img src="images/bot.jpg" alt="bot-image">
+      <img src="<%= Routes.static_path(@conn, "/images/cassian.jpg") %>" alt="bot-image">
   </div>
   </div>
 </section>
