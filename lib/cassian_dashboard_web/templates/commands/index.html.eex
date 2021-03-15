@@ -1,0 +1,20 @@
+<section>
+  <div class="commands-landing">
+    <div class="commands">
+      <%= for {command, caller} <- @commands do %>
+        <div class="command rounded-box shadow-light command-element-holder">
+          <span class="name">.<%= command %></span><%= if caller do %> <span class="usage">[<%= caller %>]</span><% end %>
+        </div>
+      <% end %>
+    </div>
+    <div class="command-categories rounded-box shadow-light command-element-holder">
+      <%= for x <- ["All", "Playback", "Test", "Kek", "This", "Is", "Retarded"] do %>
+        <p class="rounded-box"><%= x %></p>
+      <% end %>
+    </div>
+  </div>
+  <br>
+  <br>
+  <br>
+  <br>
+</section>
