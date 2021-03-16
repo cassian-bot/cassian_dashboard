@@ -13,8 +13,4 @@ defmodule CassianDashboardWeb.ErrorView do
   def template_not_found(template, _assigns) do
     Phoenix.Controller.status_message_from_template(template)
   end
-
-  def error_type(data) do
-    IO.inspect(data)
-  end
 end
