@@ -8,7 +8,7 @@ defmodule CassianDashboard.Accounts.Account do
     field :refresh_token, :string
     field :token, :string
     field :username, :string
-    field :valid_until, :utc_datetime
+    field :expires_at, :utc_datetime
 
     timestamps()
   end
@@ -27,10 +27,10 @@ defmodule CassianDashboard.Accounts.Account do
     refresh_token: String.t(),
     token: String.t(),
     username: String.t(),
-    valid_until: DateTime.t()
+    expires_at: DateTime.t()
   }
   def changeset_from_oauth(auth) do
-    valid_until = DateTime.from_unix!(auth.credentials.expires_at)
+    expires_at = DateTime.from_unix!(auth.credentials.expires_at)
     token = auth.credentials.token
     refresh_token = auth.credentials.refresh_token
     discord_id = auth.uid |> String.to_integer()
@@ -38,7 +38,7 @@ defmodule CassianDashboard.Accounts.Account do
     avatar = auth.extra.raw_info.user["avatar"]
 
     %{
-      valid_until: valid_until,
+      expires_at: expires_at,
       token: token,
       refresh_token: refresh_token,
       discord_id: discord_id,
