@@ -35,3 +35,6 @@ npm-debug.log
 
 # Elixir LS vscode plugin
 /.elixir_ls
+
+# .env file for system environments
+/.env
