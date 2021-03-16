@@ -4,7 +4,7 @@
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Cassian - A Discord music bot written in Elixir</title>
+    <title>You need to be logged in...</title>
     <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/app.css") %>"/>
     <link rel="icon" href="<% Routes.static_path(@conn, "/favicon.ico") %>">
     <script defer type="text/javascript" src="<%= Routes.static_path(@conn, "/js/app.js") %>"></script>
@@ -24,8 +24,10 @@
     <main role="main" class="container">
       <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
       <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
-      <div class="wave rainbow"></div>
-      <%= @inner_content %>
+      <div class="wave error"></div>
+      <section>
+        <h1>You need to be logged in to access this page.</h1>
+      </section>
     </main>
   </body>
 </html>

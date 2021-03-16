@@ -1,5 +1,5 @@
 defmodule CassianDashboard.Accounts.ErrorHandler do
-  # import Plug.Conn
+  import Plug.Conn
   alias Phoenix.Controller
 
   @behaviour Guardian.Plug.ErrorHandler
@@ -9,8 +9,8 @@ defmodule CassianDashboard.Accounts.ErrorHandler do
     IO.inspect(type, label: "Type")
 
     conn
+    |> put_status(401)
     |> Controller.put_view(CassianDashboardWeb.ErrorView)
-    |> Controller.put_layout({CassianDashboardWeb.LayoutView, "app.html"})
-    |> Controller.render(:unauthorized)
+    |> Controller.render(:"401")
   end
 end
