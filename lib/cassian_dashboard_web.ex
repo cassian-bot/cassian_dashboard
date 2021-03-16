@@ -39,6 +39,15 @@ defmodule CassianDashboardWeb do
 
       # Include shared imports and aliases for views
       unquote(view_helpers())
+
+      # Shared partials
+      def render_shared(template, assigns \\ []) do
+        render CassianDashboardWeb.SharedView, template, assigns
+      end
+
+      def current_user(conn) do
+        Guardian.Plug.current_resource(conn)
+      end
     end
   end
 

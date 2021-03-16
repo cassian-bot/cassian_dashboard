@@ -28,7 +28,7 @@ config :phoenix, :json_library, Jason
 
 # Setup oauth2 for Discord
 config :ueberauth, Ueberauth,
-  base_path: "/login",
+  base_path: "/auth",
   providers: [
     discord: {Ueberauth.Strategy.Discord, []}
   ]

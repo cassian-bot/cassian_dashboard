@@ -82,9 +82,8 @@ header {
     transition: all 0.3s ease 0s;
 }
 
-.button-login {
+.button-auth-control {
     margin-left: 50px;
-    
 }
 
 .button-discord {
@@ -93,6 +92,10 @@ header {
 
 .button-discord:hover {
     background-color: var(--dark-blurple);
+}
+
+.button-logout {
+    background-color: #df294d;
 }
 
 .wave {

@@ -34,7 +34,7 @@ defmodule CassianDashboardWeb.Router do
 
   end
 
-  scope "/login", CassianDashboardWeb.Login do
+  scope "/auth", CassianDashboardWeb.Login do
     pipe_through :browser
 
     scope "/discord" do

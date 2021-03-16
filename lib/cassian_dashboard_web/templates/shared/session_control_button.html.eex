@@ -1,0 +1,5 @@
+<%= if current_user(@conn) do %>
+    <a href="<%= Routes.discord_path(@conn, :request) %>"><button class="button button-auth-control button-logout">Logout</button></a>
+<% else %>
+    <a href="<%= Routes.discord_path(@conn, :request) %>"><button class="button button-auth-control button-discord">Login</button></a>
+<% end %>
