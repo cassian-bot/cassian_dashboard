@@ -74,3 +74,6 @@ config :phoenix, :stacktrace_depth, 20
 
 # Initialize plugs at runtime for faster development compilation
 config :phoenix, :plug_init_mode, :runtime
+
+config :cassian_dashboard, CassianDashboard.Accounts.Guardian,
+  secret_key: "tu/jiMPCPPBxh9kCWvSeWQwPzf2ZIey/GWW4OeqRDQp4+et42jRxkZOLrvlIye4f"
