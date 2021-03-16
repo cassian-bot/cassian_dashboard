@@ -4,7 +4,7 @@ defmodule CassianDashboard.Accounts.Account do
 
   schema "accounts" do
     field :avatar, :string
-    field :discord_id, :string
+    field :discord_id, :integer
     field :refresh_token, :string
     field :token, :string
     field :username, :string
@@ -19,5 +19,31 @@ defmodule CassianDashboard.Accounts.Account do
     |> cast(attrs, [:discord_id, :avatar, :username, :token, :valid_until, :refresh_token])
     |> validate_required([:discord_id, :avatar, :username, :token, :valid_until, :refresh_token])
     |> unique_constraint(:discord_id)
+  end
+
+  @spec changeset_from_oauth(auth :: %Ueberauth.Auth{}) :: %{
+    avatar: String.t(),
+    discord_id: integer(),
+    refresh_token: String.t(),
+    token: String.t(),
+    username: String.t(),
+    valid_until: DateTime.t()
+  }
+  def changeset_from_oauth(auth) do
+    valid_until = DateTime.from_unix!(auth.credentials.expires_at)
+    token = auth.credentials.token
+    refresh_token = auth.credentials.refresh_token
+    discord_id = auth.uid |> String.to_integer()
+    username = auth.info.nickname
+    avatar = auth.extra.raw_info.user["avatar"]
+
+    %{
+      valid_until: valid_until,
+      token: token,
+      refresh_token: refresh_token,
+      discord_id: discord_id,
+      username: username,
+      avatar: avatar
+    }
   end
 end

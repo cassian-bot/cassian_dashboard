@@ -3,7 +3,7 @@ defmodule CassianDashboard.Repo.Migrations.CreateAccounts do
 
   def change do
     create table(:accounts) do
-      add :discord_id, :string
+      add :discord_id, :bigint
       add :avatar, :string
       add :username, :string
       add :token, :string
