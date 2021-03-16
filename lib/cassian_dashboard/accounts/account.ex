@@ -16,8 +16,8 @@ defmodule CassianDashboard.Accounts.Account do
   @doc false
   def changeset(account, attrs) do
     account
-    |> cast(attrs, [:discord_id, :avatar, :username, :token, :valid_until, :refresh_token])
-    |> validate_required([:discord_id, :avatar, :username, :token, :valid_until, :refresh_token])
+    |> cast(attrs, [:discord_id, :avatar, :username, :token, :expires_at, :refresh_token])
+    |> validate_required([:discord_id, :avatar, :username, :token, :expires_at, :refresh_token])
     |> unique_constraint(:discord_id)
   end
 

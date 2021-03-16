@@ -9,19 +9,6 @@ defmodule CassianDashboard.Accounts do
   alias CassianDashboard.Accounts.Account
 
   @doc """
-  Returns the list of accounts.
-
-  ## Examples
-
-      iex> list_accounts()
-      [%Account{}, ...]
-
-  """
-  def list_accounts do
-    Repo.all(Account)
-  end
-
-  @doc """
   Gets a single account.
 
   Raises `Ecto.NoResultsError` if the Account does not exist.
@@ -36,24 +23,6 @@ defmodule CassianDashboard.Accounts do
 
   """
   def get_account!(id), do: Repo.get!(Account, id)
-
-  @doc """
-  Creates a account.
-
-  ## Examples
-
-      iex> create_account(%{field: value})
-      {:ok, %Account{}}
-
-      iex> create_account(%{field: bad_value})
-      {:error, %Ecto.Changeset{}}
-
-  """
-  def create_account(attrs \\ %{}) do
-    %Account{}
-    |> Account.changeset(attrs)
-    |> Repo.insert()
-  end
 
   @doc """
   Updates a account.
@@ -73,21 +42,6 @@ defmodule CassianDashboard.Accounts do
     |> Repo.update()
   end
 
-  @doc """
-  Deletes a account.
-
-  ## Examples
-
-      iex> delete_account(account)
-      {:ok, %Account{}}
-
-      iex> delete_account(account)
-      {:error, %Ecto.Changeset{}}
-
-  """
-  def delete_account(%Account{} = account) do
-    Repo.delete(account)
-  end
 
   @doc """
   Returns an `%Ecto.Changeset{}` for tracking account changes.
@@ -100,5 +54,23 @@ defmodule CassianDashboard.Accounts do
   """
   def change_account(%Account{} = account, attrs \\ %{}) do
     Account.changeset(account, attrs)
+  end
+
+  def from_discord_id(discord_id) when is_nil(discord_id) do
+    nil
+  end
+
+  def from_discord_id(discord_id) do
+    Repo.one(
+      from account in Account,
+        where: account.discord_id == ^discord_id,
+        select: account
+    )
+  end
+
+  def create_or_update!(opts \\ %{}) do
+    (from_discord_id(Map.get(opts, :discord_id)) || %Account{})
+    |> Account.changeset(opts)
+    |> Repo.insert_or_update!()
   end
 end
