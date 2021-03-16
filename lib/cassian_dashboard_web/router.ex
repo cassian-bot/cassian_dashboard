@@ -13,16 +13,25 @@ defmodule CassianDashboardWeb.Router do
     plug :accepts, ["json"]
   end
 
-  scope "/", CassianDashboardWeb do
-    pipe_through :browser
-
-    get "/", PageController, :index
+  pipeline :auth do
+    plug CassianDashboard.Accounts.Pipeline
   end
 
-  scope "/commands", CassianDashboardWeb do
-    pipe_through :browser
+  pipeline :ensure_auth do
+    plug Guardian.Plug.EnsureAuthenticated
+  end
 
-    get "/", CommandsController, :index
+  scope "/", CassianDashboardWeb do
+    pipe_through [:browser, :auth]
+
+    get "/", PageController, :index
+
+    scope "/commands" do
+      pipe_through :ensure_auth
+
+      get "/commands", CommandsController, :index
+    end
+
   end
 
   scope "/login", CassianDashboardWeb.Login do

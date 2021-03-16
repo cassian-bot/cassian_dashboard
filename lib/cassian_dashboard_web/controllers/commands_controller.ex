@@ -15,6 +15,8 @@ defmodule CassianDashboardWeb.CommandsController do
       {"unshuffle", nil}
     ]
 
+    Guardian.Plug.current_resource(conn) |> IO.inspect(label: "User")
+
     render(conn, "index.html", commands: commands)
   end
 end

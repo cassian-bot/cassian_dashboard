@@ -1,8 +1,7 @@
 defmodule CassianDashboardWeb.Login.DiscordController do
   use CassianDashboardWeb, :controller
 
-  alias CassianDashboard.Accounts
-  alias Accounts.Account
+  alias CassianDashboard.{Accounts, Accounts.Account, Accounts.Guardian}
 
   plug Ueberauth
   alias Ueberauth.Strategy.Helpers
@@ -23,9 +22,8 @@ defmodule CassianDashboardWeb.Login.DiscordController do
       Account.changeset_from_oauth(auth)
       |> Accounts.create_or_update!()
 
-    IO.inspect(user)
-
     conn
+    |> Guardian.Plug.sign_in(user)
     |> redirect(to: "/")
   end
 end
