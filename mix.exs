@@ -20,7 +20,7 @@ defmodule CassianDashboard.MixProject do
   def application do
     [
       mod: {CassianDashboard.Application, []},
-      extra_applications: [:logger, :runtime_tools]
+      extra_applications: [:logger, :runtime_tools, :ueberauth_discord]
     ]
   end
 
@@ -43,7 +43,8 @@ defmodule CassianDashboard.MixProject do
       {:telemetry_poller, "~> 0.4"},
       {:gettext, "~> 0.11"},
       {:jason, "~> 1.0"},
-      {:plug_cowboy, "~> 2.0"}
+      {:plug_cowboy, "~> 2.0"},
+      {:ueberauth_discord, "~> 0.5.2"}
     ]
   end
 

@@ -25,6 +25,17 @@ defmodule CassianDashboardWeb.Router do
     get "/", CommandsController, :index
   end
 
+  scope "/login", CassianDashboardWeb.Login do
+    pipe_through :browser
+
+    scope "/discord" do
+      get  "/",         DiscordController, :request
+      get  "/callback", DiscordController, :callback
+      post "/callback", DiscordController, :callback
+    end
+
+  end
+
   # Other scopes may use custom stacks.
   # scope "/api", CassianDashboardWeb do
   #   pipe_through :api

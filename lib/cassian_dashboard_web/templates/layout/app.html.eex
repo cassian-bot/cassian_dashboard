@@ -19,7 +19,7 @@
             <li><a class="underline-link" href="https://github.com/zastrixarundell/cassian" target="_blank">Code</a></li>
           </ul>
         </nav>
-        <a href="#login"><button class="button button-login button-discord">Login</button></a>
+        <a href="<%= Routes.discord_path(@conn, :request) %>"><button class="button button-login button-discord">Login</button></a>
     </header>
     <main role="main" class="container">
       <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
