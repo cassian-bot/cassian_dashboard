@@ -1,14 +1,16 @@
 defmodule CassianDashboard.Accounts.ErrorHandler do
-  import Plug.Conn
+  # import Plug.Conn
+  alias Phoenix.Controller
 
   @behaviour Guardian.Plug.ErrorHandler
 
   @impl Guardian.Plug.ErrorHandler
   def auth_error(conn, {type, _reason}, _opts) do
-    body = to_string(type)
+    IO.inspect(type, label: "Type")
 
     conn
-    |> put_resp_content_type("text/plain")
-    |> send_resp(401, body)
+    |> Controller.put_view(CassianDashboardWeb.ErrorView)
+    |> Controller.put_layout({CassianDashboardWeb.LayoutView, "app.html"})
+    |> Controller.render(:unauthorized)
   end
 end
