@@ -99,6 +99,10 @@ header {
     background-color: #df294d;
 }
 
+.button-logout:hover {
+    background-color: #ba1838;
+}
+
 .wave {
     width: 100%;
     height: 150px;
@@ -127,10 +131,17 @@ header {
 /* Everything regarding the main landing page */
 
 section {
-    margin-top: 150px;
     width: 60%;
     margin-right: auto;
     margin-left: auto;
+}
+
+.big-top-margin {
+    margin-top: 150px;
+}
+
+.small-top-margin {
+    margin-top: 50px;
 }
 
 .bot-landing {
@@ -185,7 +196,13 @@ section {
     font-size: 2em;
 }
 
-// 
+//  Commands
+
+.shadow-light {
+    box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.4);
+}
+
+// Big containers
 
 .command-element-holder {
     background-color: #161718;
@@ -193,26 +210,101 @@ section {
 
 .commands-landing {
     display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
+    flex-flow: row wrap;
     gap: 20px;
 }
 
-.commands {
-    flex-grow: 5;
+// Menu-commands as well as it behaves the same.
+.menu-select, .menu-commands {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
     gap: 20px;
-    // background: #4E5D94;
+}
+
+.menu-select {
+    min-width: 240px;
+    flex-grow: 1.3;
+}
+
+.rounded-box {
+    border-radius: 5px;
+}
+
+.menu-category {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px;
+    text-align: center;
+}
+
+// General category element
+
+.category-element {
+    // padding: 5px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    overflow: hidden;
+    background-color: rgb(53, 53, 53);
+    cursor: pointer;
+    user-select: none;
+}
+
+// Connections
+
+.connection {
+    position: relative;
+    font-weight: 500;
+    border-left: 5px solid;
+    border-right: 5px solid transparent;
+}
+
+.logo-small {
+    position: absolute;
+    left: 20px;
+    width: 24px;
+    fill: white;
+}
+
+// Specific connections
+
+.youtube-connection {
+    background-color:  red;
+}
+
+.spotify-connection {
+    background-color:  #1DB954;
+}
+
+// Category buttons
+
+.command-category {
+    background-size: 200%;
+    background-position: 0% 0%;
+    background-image: linear-gradient(145deg, var(--main), #e1aafa, #ffaecc);
+    color: #23272A;
+    transition: ease-in 0.3s;
+}
+
+.command-category:hover {
+    background-position: 100% 0%;
+}
+
+// Commands
+
+.menu-commands {
+    flex-grow: 5;
+}
+
+.command-box {
+    background-color: #161718;
 }
 
 .command {
-    padding: 15px;
-    padding-left: 50px;
-    width: 100%;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-left: 25px;
     font-size: 1.8em;
-    transition: height 1s ease 0s;
 }
 
 .command > .name {
@@ -222,31 +314,4 @@ section {
 .command > .usage {
     font-weight: 300;
     color: #afb6b8;
-}
-
-.rounded-box {
-    border-radius: 2px;
-}
-
-.command-categories {
-    flex-grow: 1;
-    flex-direction: column;
-    display: flex;
-    justify-content: space-between;
-    padding: 15px;
-    gap: 15px;
-    
-}
-
-.command-categories p {
-    background-image: linear-gradient(145deg, var(--main), #cd98e6);
-    padding: 10px;
-    text-align: center;
-    color: #23272A;
-    cursor: pointer;
-    user-select: none;
-}
-
-.shadow-light {
-    box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.4);
 }

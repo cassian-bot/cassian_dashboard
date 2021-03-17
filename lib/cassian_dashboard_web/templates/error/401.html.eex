@@ -25,7 +25,7 @@
       <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
       <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
       <div class="wave error"></div>
-      <section>
+      <section class="small-top-margin">
         <h1>You need to be logged in to access this page.</h1>
       </section>
     </main>
