@@ -29,7 +29,7 @@ defmodule CassianDashboardWeb.Router do
     scope "/commands" do
       pipe_through :ensure_auth
 
-      get "/commands", CommandsController, :index
+      get "/", CommandsController, :index
     end
 
   end
