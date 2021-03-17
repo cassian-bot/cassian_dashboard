@@ -241,9 +241,9 @@ section {
 // General category element
 
 .category-element {
-    // padding: 5px;
-    padding-top: 10px;
-    padding-bottom: 10px;
+    padding: 10px 25px 10px 25px;
+    // padding-top: 10px;
+    // padding-bottom: 10px;
     overflow: hidden;
     background-color: rgb(53, 53, 53);
     cursor: pointer;
@@ -301,9 +301,7 @@ section {
 }
 
 .command {
-    padding-top: 15px;
-    padding-bottom: 15px;
-    padding-left: 25px;
+    margin: 15px 25px 15px 25px;
     font-size: 1.8em;
 }
 
