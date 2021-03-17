@@ -26,4 +26,18 @@ defmodule CassianDashboardWeb.Login.DiscordController do
     |> Guardian.Plug.sign_in(user)
     |> redirect(to: "/")
   end
+
+  def delete(conn, _opts) do
+    case Guardian.Plug.current_resource(conn) |> IO.inspect() do
+      nil ->
+        conn
+        |> put_flash(:error, "Can't log out if you're not logged in.")
+        |> redirect(to: "/")
+
+      _user ->
+        conn
+        |> Guardian.Plug.sign_out()
+        |> redirect(to: "/")
+    end
+  end
 end
