@@ -11,7 +11,6 @@ defmodule CassianDashboardWeb.Login.DiscordController do
   end
 
   def callback(%{assigns: %{ueberauth_failure: _fails}} = conn, _params) do
-    IO.inspect("Kek")
     conn
     |> put_flash(:error, "Failed to authenticate.")
     |> redirect(to: "/")
@@ -28,7 +27,7 @@ defmodule CassianDashboardWeb.Login.DiscordController do
   end
 
   def delete(conn, _opts) do
-    case Guardian.Plug.current_resource(conn) |> IO.inspect() do
+    case Guardian.Plug.current_resource(conn) do
       nil ->
         conn
         |> put_flash(:error, "Can't log out if you're not logged in.")
