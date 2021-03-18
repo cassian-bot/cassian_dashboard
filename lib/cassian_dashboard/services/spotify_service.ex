@@ -72,13 +72,13 @@ defmodule CassianDashboard.Services.SpotifyService do
   @doc """
   Get the playlists for a connection. Default limit is 10.
   """
-  @spec get_playlists(connection :: %Connection{}, limit :: integer()) :: {:ok, %{}} | {:error, :noop}
+  @spec get_playlists(connection :: %Connection{}, limit :: integer()) :: {:ok, [%{}]} | {:error, :noop}
   def get_playlists(connection, limit \\ 10) do
     headers = generate_user_headers(connection)
 
     case HTTPoison.get(@playlist_link, headers, params: [limit: limit]) do
       {:ok, %HTTPoison.Response{body: body, status_code: 200}} ->
-        {:ok, Jason.decode!(body, keys: :atoms)}
+        {:ok, Jason.decode!(body, keys: :atoms).items}
 
       _ ->
         {:error, :noop}
@@ -96,7 +96,7 @@ defmodule CassianDashboard.Services.SpotifyService do
 
     case HTTPoison.get(@search_link, headers, params: [type: "playlist", q: query, limit: 1]) do
       {:ok, %HTTPoison.Response{body: body, status_code: 200}} ->
-        {:ok, Jason.decode!(body, keys: :atoms)}
+        {:ok, Jason.decode!(body, keys: :atoms).playlists.items |> List.first()}
 
       _ ->
         {:error, :noop}
