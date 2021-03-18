@@ -49,9 +49,13 @@ defmodule CassianDashboard.Connections do
       {:error, %Ecto.Changeset{}}
 
   """
-  def create_connection(attrs \\ %{}) do
-    %Connection{}
-    |> Connection.changeset(attrs)
+  def create_connection(account, auth) do
+    auth =
+      auth
+      |> Connection.params_from_oauth()
+
+    %Connection{account_id: account.id}
+    |> Connection.changeset(auth)
     |> Repo.insert()
   end
 

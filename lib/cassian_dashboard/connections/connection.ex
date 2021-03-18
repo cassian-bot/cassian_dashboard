@@ -6,6 +6,7 @@ defmodule CassianDashboard.Connections.Connection do
     field :refresh_token, :string
     field :token, :string
     field :type, :string
+    field :account_id, :integer
 
     timestamps()
   end
@@ -15,6 +16,7 @@ defmodule CassianDashboard.Connections.Connection do
     connection
     |> cast(attrs, [:type, :token, :refresh_token])
     |> validate_required([:type, :token, :refresh_token])
+    |> unique_constraint(:unique_user_connection, name: :unique_connection)
   end
 
   @spec params_from_oauth(auth :: %Ueberauth.Auth{}) :: %{type: String.t(), token: String.t(), refresh_token: String.t()}

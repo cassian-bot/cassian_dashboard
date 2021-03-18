@@ -1,6 +1,8 @@
 defmodule CassianDashboardWeb.Login.SpotifyController do
   use CassianDashboardWeb, :controller
 
+  alias CassianDashboard.Connections
+
   plug Ueberauth
   alias Ueberauth.Strategy.Helpers
 
@@ -16,6 +18,10 @@ defmodule CassianDashboardWeb.Login.SpotifyController do
 
   def callback(%{assigns: %{ueberauth_auth: auth}} = conn, _params) do
     IO.inspect(auth, label: "Spotify auth info")
+
+    Guardian.Plug.current_resource(conn)
+    |> Connections.create_connection(auth)
+    |> IO.inspect(label: "Spotify connection")
 
     conn
     |> redirect(to: "/")
