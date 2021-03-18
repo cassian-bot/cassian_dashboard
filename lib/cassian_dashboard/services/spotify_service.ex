@@ -102,4 +102,24 @@ defmodule CassianDashboard.Services.SpotifyService do
         {:error, :noop}
     end
   end
+
+  @doc """
+  Get the tracks in a playlist.
+  """
+  @spec playlist_tracks(connection :: %Connection{}, playlist :: %{}) :: {:ok, %{}} | {:error, :noop}
+  def playlist_tracks(connection, playlist) do
+    id = playlist.id
+
+    headers = generate_user_headers(connection)
+
+    link = "https://api.spotify.com/v1/playlists/#{id}/tracks"
+
+    case HTTPoison.get(link, headers) do
+      {:ok, %HTTPoison.Response{body: body, status_code: 200}} ->
+        {:ok, Jason.decode!(body, keys: :atoms).items}
+
+      _ ->
+        {:error, :noop}
+    end
+  end
 end
