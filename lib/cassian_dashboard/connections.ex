@@ -9,16 +9,49 @@ defmodule CassianDashboard.Connections do
   alias CassianDashboard.Connections.Connection
 
   @doc """
-  Returns the list of connections.
+  Gets a connection for an account. You can specify the provider,
+  if the provider field is left nil it will list all existing connections.
 
   ## Examples
 
-      iex> list_connections()
-      [%Connection{}, ...]
+      iex> connections_for_account(%Account{id: 1})
+      [%Connection{}]
 
+      iex> connections_for_account(1)
+      [%Connection{}]
+
+      iex> connections_for_account(1, "spotify")
+      [%Connection{type: "spotify"}]
+
+      iex> connections_for_account(1, "asdf")
+      []
   """
-  def list_connections do
-    Repo.all(Connection)
+  @spec connections_for_account(
+    account :: %CassianDashboard.Accounts.Account{} | integer(),
+    provider :: String.t() | nil) :: list(%Connection{})
+  def connections_for_account(account, provider \\ nil)
+
+  def connections_for_account(account, provider) when is_integer(account) do
+    query =
+      from connection in Connection,
+        where: connection.account_id == ^account,
+        select: connection
+
+    query =
+      if provider do
+        from connection in query,
+          where: connection.type == ^provider
+      else
+        query
+      end
+
+    Repo.all(
+      query
+    )
+  end
+
+  def connections_for_account(account, provider) do
+    connections_for_account(account.id, provider)
   end
 
   @doc """
