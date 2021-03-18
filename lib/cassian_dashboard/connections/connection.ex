@@ -16,4 +16,13 @@ defmodule CassianDashboard.Connections.Connection do
     |> cast(attrs, [:type, :token, :refresh_token])
     |> validate_required([:type, :token, :refresh_token])
   end
+
+  @spec params_from_oauth(auth :: %Ueberauth.Auth{}) :: %{type: String.t(), token: String.t(), refresh_token: String.t()}
+  def params_from_oauth(auth) do
+    %{
+      type: auth.provider |> to_string(),
+      token: auth.credentials.token,
+      refresh_token: auth.credentials.refresh_token
+    }
+  end
 end
