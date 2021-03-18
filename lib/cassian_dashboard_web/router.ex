@@ -33,6 +33,7 @@ defmodule CassianDashboardWeb.Router do
     end
   end
 
+  # Everything having to do with oauth.
   scope "/auth", CassianDashboardWeb.Login do
     pipe_through [:browser, :auth]
 
@@ -44,6 +45,8 @@ defmodule CassianDashboardWeb.Router do
     end
 
     scope "/spotify" do
+      pipe_through :ensure_auth
+
       get "/", SpotifyController, :request
       get "/callback", SpotifyController, :callback
       post "/callback", SpotifyController, :callback

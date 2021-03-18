@@ -20,7 +20,7 @@ defmodule CassianDashboardWeb.Login.SpotifyController do
     IO.inspect(auth, label: "Spotify auth info")
 
     Guardian.Plug.current_resource(conn)
-    |> Connections.create_connection(auth)
+    |> Connections.create_or_update(auth)
     |> IO.inspect(label: "Spotify connection")
 
     conn

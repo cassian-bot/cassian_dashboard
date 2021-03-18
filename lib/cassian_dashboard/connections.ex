@@ -7,6 +7,9 @@ defmodule CassianDashboard.Connections do
   alias CassianDashboard.Repo
 
   alias CassianDashboard.Connections.Connection
+  alias CassianDashboard.Accounts.Account
+
+  alias Ueberauth.Auth
 
   @doc """
   Gets a connection for an account. You can specify the provider,
@@ -27,7 +30,7 @@ defmodule CassianDashboard.Connections do
       []
   """
   @spec connections_for_account(
-          account :: %CassianDashboard.Accounts.Account{} | integer(),
+          account :: %Account{} | integer(),
           provider :: String.t() | nil
         ) :: list(%Connection{})
   def connections_for_account(account, provider \\ nil)
@@ -54,6 +57,34 @@ defmodule CassianDashboard.Connections do
   end
 
   @doc """
+  Get the connection for a specific provider from the account.
+
+  ## Examples
+
+      iex> connection_for_account(%Account{id: 1}, "spotify")
+      %Connection{type: "spotify", account_id: 1}
+
+      iex> connection_for_account(1, "spotify")
+      %Connection{type: "spotify", account_id: 1}
+
+      iex> connection_for_account(-1, "spotify")
+      nil
+  """
+  @spec connection_for_account(account :: %Account{} | integer(), provider :: String.t()) ::
+    %Connection{} | nil
+  def connection_for_account(account, provider) when is_integer(account) do
+    Repo.one(
+      from connection in Connection,
+        where: connection.account_id == ^account and connection.type == ^provider,
+        select: connection
+    )
+  end
+
+  def connection_for_account(account, provider) do
+    connection_for_account(account.id, provider)
+  end
+
+  @doc """
   Gets a single connection.
 
   Raises `Ecto.NoResultsError` if the Connection does not exist.
@@ -70,37 +101,25 @@ defmodule CassianDashboard.Connections do
   def get_connection!(id), do: Repo.get!(Connection, id)
 
   @doc """
-  Creates a connection.
+  Create or update the connection for an account.
 
   ## Examples
 
-      iex> create_connection(%{field: value})
+      iex> create_or_update(%Account{id: 10}, %Auth{})
       {:ok, %Connection{}}
 
-      iex> create_connection(%{field: bad_value})
+      iex> create_or_update(%Account{id: -10}, %Auth{})
       {:error, %Ecto.Changeset{}}
-
   """
-  def create_connection(account, auth) do
-    auth =
-      auth
-      |> Connection.params_from_oauth()
+  @spec create_or_update(account :: %Account{}, auth :: %Auth{}) ::
+    {:ok, %Connection{}} | {:error, %Ecto.Changeset{}}
+  def create_or_update(account, auth) do
+    params = Connection.params_from_oauth(auth)
 
-    %Connection{account_id: account.id}
-    |> Connection.changeset(auth)
-    |> Repo.insert()
-  end
-
-  def higher_than(value) when is_number(value) == false do
-    :nan
-  end
-
-  def higher_than(value) when value > 10 do
-    :yes
-  end
-
-  def higher_than(_) do
-    :no
+    (connection_for_account(account, params.type) || %Connection{account_id: account.id})
+    |> IO.inspect(label: "Connection")
+    |> Connection.changeset(params)
+    |> Repo.insert_or_update()
   end
 
   @doc """
@@ -135,18 +154,5 @@ defmodule CassianDashboard.Connections do
   """
   def delete_connection(%Connection{} = connection) do
     Repo.delete(connection)
-  end
-
-  @doc """
-  Returns an `%Ecto.Changeset{}` for tracking connection changes.
-
-  ## Examples
-
-      iex> change_connection(connection)
-      %Ecto.Changeset{data: %Connection{}}
-
-  """
-  def change_connection(%Connection{} = connection, attrs \\ %{}) do
-    Connection.changeset(connection, attrs)
   end
 end
