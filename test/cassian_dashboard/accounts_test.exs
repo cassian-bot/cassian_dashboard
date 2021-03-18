@@ -6,9 +6,30 @@ defmodule CassianDashboard.AccountsTest do
   describe "accounts" do
     alias CassianDashboard.Accounts.Account
 
-    @valid_attrs %{avatar: "some avatar", discord_id: "some discord_id", refresh_token: "some refresh_token", token: "some token", username: "some username", valid_until: "2010-04-17T14:00:00Z"}
-    @update_attrs %{avatar: "some updated avatar", discord_id: "some updated discord_id", refresh_token: "some updated refresh_token", token: "some updated token", username: "some updated username", valid_until: "2011-05-18T15:01:01Z"}
-    @invalid_attrs %{avatar: nil, discord_id: nil, refresh_token: nil, token: nil, username: nil, valid_until: nil}
+    @valid_attrs %{
+      avatar: "some avatar",
+      discord_id: "some discord_id",
+      refresh_token: "some refresh_token",
+      token: "some token",
+      username: "some username",
+      valid_until: "2010-04-17T14:00:00Z"
+    }
+    @update_attrs %{
+      avatar: "some updated avatar",
+      discord_id: "some updated discord_id",
+      refresh_token: "some updated refresh_token",
+      token: "some updated token",
+      username: "some updated username",
+      valid_until: "2011-05-18T15:01:01Z"
+    }
+    @invalid_attrs %{
+      avatar: nil,
+      discord_id: nil,
+      refresh_token: nil,
+      token: nil,
+      username: nil,
+      valid_until: nil
+    }
 
     def account_fixture(attrs \\ %{}) do
       {:ok, account} =

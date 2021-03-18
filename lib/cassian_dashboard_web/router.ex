@@ -31,22 +31,21 @@ defmodule CassianDashboardWeb.Router do
 
       get "/", CommandsController, :index
     end
-
   end
 
   scope "/auth", CassianDashboardWeb.Login do
     pipe_through [:browser, :auth]
 
     scope "/discord" do
-      get  "/",         DiscordController, :request
-      get "/logout",    DiscordController, :delete
-      get  "/callback", DiscordController, :callback
+      get "/", DiscordController, :request
+      get "/logout", DiscordController, :delete
+      get "/callback", DiscordController, :callback
       post "/callback", DiscordController, :callback
     end
 
     scope "/spotify" do
-      get  "/",         SpotifyController, :request
-      get  "/callback", SpotifyController, :callback
+      get "/", SpotifyController, :request
+      get "/callback", SpotifyController, :callback
       post "/callback", SpotifyController, :callback
     end
   end

@@ -31,9 +31,11 @@ config :ueberauth, Ueberauth,
   base_path: "/auth",
   providers: [
     discord: {Ueberauth.Strategy.Discord, []},
-    spotify: {Ueberauth.Strategy.Spotify, [
-      default_scope: "playlist-read-private,user-library-read"
-    ]}
+    spotify:
+      {Ueberauth.Strategy.Spotify,
+       [
+         default_scope: "playlist-read-private,user-library-read"
+       ]}
   ]
 
 # Added here as we'll need it in both dev and prod
@@ -48,7 +50,7 @@ config :ueberauth, Ueberauth.Strategy.Spotify.OAuth,
 
 config :cassian_dashboard, CassianDashboard.Accounts.Guardian,
   issuer: :cassian_dashboard,
-  ttl: { 7, :days }
+  ttl: {7, :days}
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.

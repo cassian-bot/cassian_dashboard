@@ -42,7 +42,7 @@ defmodule CassianDashboardWeb do
 
       # Shared partials
       def render_shared(template, assigns \\ []) do
-        render CassianDashboardWeb.SharedView, template, assigns
+        render(CassianDashboardWeb.SharedView, template, assigns)
       end
 
       def current_user(conn) do

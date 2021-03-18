@@ -19,7 +19,11 @@ defmodule CassianDashboard.Connections.Connection do
     |> unique_constraint(:unique_user_connection, name: :unique_connection)
   end
 
-  @spec params_from_oauth(auth :: %Ueberauth.Auth{}) :: %{type: String.t(), token: String.t(), refresh_token: String.t()}
+  @spec params_from_oauth(auth :: %Ueberauth.Auth{}) :: %{
+          type: String.t(),
+          token: String.t(),
+          refresh_token: String.t()
+        }
   def params_from_oauth(auth) do
     %{
       type: auth.provider |> to_string(),

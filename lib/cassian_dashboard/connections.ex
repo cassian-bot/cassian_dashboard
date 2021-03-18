@@ -27,8 +27,9 @@ defmodule CassianDashboard.Connections do
       []
   """
   @spec connections_for_account(
-    account :: %CassianDashboard.Accounts.Account{} | integer(),
-    provider :: String.t() | nil) :: list(%Connection{})
+          account :: %CassianDashboard.Accounts.Account{} | integer(),
+          provider :: String.t() | nil
+        ) :: list(%Connection{})
   def connections_for_account(account, provider \\ nil)
 
   def connections_for_account(account, provider) when is_integer(account) do
@@ -45,9 +46,7 @@ defmodule CassianDashboard.Connections do
         query
       end
 
-    Repo.all(
-      query
-    )
+    Repo.all(query)
   end
 
   def connections_for_account(account, provider) do
@@ -90,6 +89,18 @@ defmodule CassianDashboard.Connections do
     %Connection{account_id: account.id}
     |> Connection.changeset(auth)
     |> Repo.insert()
+  end
+
+  def higher_than(value) when is_number(value) == false do
+    :nan
+  end
+
+  def higher_than(value) when value > 10 do
+    :yes
+  end
+
+  def higher_than(_) do
+    :no
   end
 
   @doc """

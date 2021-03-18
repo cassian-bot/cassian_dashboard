@@ -7,7 +7,11 @@ defmodule CassianDashboard.ConnectionsTest do
     alias CassianDashboard.Connections.Connection
 
     @valid_attrs %{refresh_token: "some refresh_token", token: "some token", type: "some type"}
-    @update_attrs %{refresh_token: "some updated refresh_token", token: "some updated token", type: "some updated type"}
+    @update_attrs %{
+      refresh_token: "some updated refresh_token",
+      token: "some updated token",
+      type: "some updated type"
+    }
     @invalid_attrs %{refresh_token: nil, token: nil, type: nil}
 
     def connection_fixture(attrs \\ %{}) do
@@ -42,7 +46,10 @@ defmodule CassianDashboard.ConnectionsTest do
 
     test "update_connection/2 with valid data updates the connection" do
       connection = connection_fixture()
-      assert {:ok, %Connection{} = connection} = Connections.update_connection(connection, @update_attrs)
+
+      assert {:ok, %Connection{} = connection} =
+               Connections.update_connection(connection, @update_attrs)
+
       assert connection.refresh_token == "some updated refresh_token"
       assert connection.token == "some updated token"
       assert connection.type == "some updated type"
@@ -50,7 +57,10 @@ defmodule CassianDashboard.ConnectionsTest do
 
     test "update_connection/2 with invalid data returns error changeset" do
       connection = connection_fixture()
-      assert {:error, %Ecto.Changeset{}} = Connections.update_connection(connection, @invalid_attrs)
+
+      assert {:error, %Ecto.Changeset{}} =
+               Connections.update_connection(connection, @invalid_attrs)
+
       assert connection == Connections.get_connection!(connection.id)
     end
 

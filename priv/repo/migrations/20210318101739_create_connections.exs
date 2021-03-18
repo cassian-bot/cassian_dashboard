@@ -9,6 +9,5 @@ defmodule CassianDashboard.Repo.Migrations.CreateConnections do
 
       timestamps()
     end
-
   end
 end
