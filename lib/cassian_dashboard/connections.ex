@@ -71,7 +71,7 @@ defmodule CassianDashboard.Connections do
       nil
   """
   @spec connection_for_account(account :: %Account{} | integer(), provider :: String.t()) ::
-    %Connection{} | nil
+          %Connection{} | nil
   def connection_for_account(account, provider) when is_integer(account) do
     Repo.one(
       from connection in Connection,
@@ -112,7 +112,7 @@ defmodule CassianDashboard.Connections do
       {:error, %Ecto.Changeset{}}
   """
   @spec create_or_update(account :: %Account{}, auth :: %Auth{}) ::
-    {:ok, %Connection{}} | {:error, %Ecto.Changeset{}}
+          {:ok, %Connection{}} | {:error, %Ecto.Changeset{}}
   def create_or_update(account, auth) do
     params = Connection.params_from_oauth(auth)
 
