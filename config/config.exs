@@ -31,7 +31,9 @@ config :ueberauth, Ueberauth,
   base_path: "/auth",
   providers: [
     discord: {Ueberauth.Strategy.Discord, []},
-    spotify: {Ueberauth.Strategy.Spotify, []}
+    spotify: {Ueberauth.Strategy.Spotify, [
+      default_scope: "playlist-read-private,user-library-read"
+    ]}
   ]
 
 # Added here as we'll need it in both dev and prod
