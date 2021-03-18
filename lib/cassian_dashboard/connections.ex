@@ -123,6 +123,23 @@ defmodule CassianDashboard.Connections do
   end
 
   @doc """
+  List all of the existing connections of a specific type.
+
+  ## Examples
+
+      iex> list_connections "spotify"
+      [%Connection{type: "spotify"}]
+  """
+  @spec list_connections(type :: String.t()) :: list(%Connection{})
+  def list_connections(type) do
+    Repo.all(
+      from connection in Connection,
+        where: connection.type == ^type,
+        select: connection
+    )
+  end
+
+  @doc """
   Updates a connection.
 
   ## Examples
