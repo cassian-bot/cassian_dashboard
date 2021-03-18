@@ -20,7 +20,7 @@ defmodule CassianDashboard.MixProject do
   def application do
     [
       mod: {CassianDashboard.Application, []},
-      extra_applications: [:logger, :runtime_tools, :ueberauth_discord]
+      extra_applications: [:logger, :runtime_tools, :ueberauth_discord, :ueberauth_spotify]
     ]
   end
 
@@ -45,6 +45,7 @@ defmodule CassianDashboard.MixProject do
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.0"},
       {:ueberauth_discord, "~> 0.5.2"},
+      {:ueberauth_spotify, "0.2.1"},
       {:guardian, "~> 2.0"}
     ]
   end

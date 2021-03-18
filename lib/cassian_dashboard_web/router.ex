@@ -39,11 +39,16 @@ defmodule CassianDashboardWeb.Router do
 
     scope "/discord" do
       get  "/",         DiscordController, :request
-      get "/logout",       DiscordController, :delete
+      get "/logout",    DiscordController, :delete
       get  "/callback", DiscordController, :callback
       post "/callback", DiscordController, :callback
     end
 
+    scope "/spotify" do
+      get  "/",         SpotifyController, :request
+      get  "/callback", SpotifyController, :callback
+      post "/callback", SpotifyController, :callback
+    end
   end
 
   # Other scopes may use custom stacks.
