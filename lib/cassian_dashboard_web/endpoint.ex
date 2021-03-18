@@ -7,7 +7,8 @@ defmodule CassianDashboardWeb.Endpoint do
   @session_options [
     store: :cookie,
     key: "_cassian_dashboard_key",
-    signing_salt: "sJgrPrn0"
+    signing_salt: "sJgrPrn0",
+    max_age: 60 * 60 * 24 * 7
   ]
 
   socket "/socket", CassianDashboardWeb.UserSocket,

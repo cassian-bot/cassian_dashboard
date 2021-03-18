@@ -39,7 +39,8 @@ config :ueberauth, Ueberauth.Strategy.Discord.OAuth,
   client_secret: System.get_env("DISCORD_CLIENT_SECRET")
 
 config :cassian_dashboard, CassianDashboard.Accounts.Guardian,
-  issuer: :cassian_dashboard
+  issuer: :cassian_dashboard,
+  ttl: { 7, :days }
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
