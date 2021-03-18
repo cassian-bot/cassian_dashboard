@@ -58,4 +58,48 @@ defmodule CassianDashboard.Services.SpotifyService do
         Connections.delete_connection(connection)
     end
   end
+
+  defp generate_user_headers(connection) do
+    [
+      {"Authorization", "Bearer #{connection.token}"},
+      {"Content-Type", "application/json"},
+      {"Accept", "application/json"}
+    ]
+  end
+
+  @playlist_link "https://api.spotify.com/v1/me/playlists"
+
+  @doc """
+  Get the playlists for a connection. Default limit is 10.
+  """
+  @spec get_playlists(connection :: %Connection{}, limit :: integer()) :: {:ok, %{}} | {:error, :noop}
+  def get_playlists(connection, limit \\ 10) do
+    headers = generate_user_headers(connection)
+
+    case HTTPoison.get(@playlist_link, headers, params: [limit: limit]) do
+      {:ok, %HTTPoison.Response{body: body, status_code: 200}} ->
+        {:ok, Jason.decode!(body, keys: :atoms)}
+
+      _ ->
+        {:error, :noop}
+    end
+  end
+
+  @search_link "https://api.spotify.com/v1/search"
+
+  @doc """
+  Search through the user playlists. Finds one which is the most similar in name.
+  """
+  @spec search_playlist(connection :: %Connection{}, query :: String.t()) :: {:ok, %{}} | {:error, :noop}
+  def search_playlist(connection, query) do
+    headers = generate_user_headers(connection)
+
+    case HTTPoison.get(@search_link, headers, params: [type: "playlist", q: query, limit: 1]) do
+      {:ok, %HTTPoison.Response{body: body, status_code: 200}} ->
+        {:ok, Jason.decode!(body, keys: :atoms)}
+
+      _ ->
+        {:error, :noop}
+    end
+  end
 end
