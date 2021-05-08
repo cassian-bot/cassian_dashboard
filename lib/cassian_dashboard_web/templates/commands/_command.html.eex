@@ -1,0 +1,5 @@
+<div class="command-box rounded-box shadow-light">
+  <div class="command">
+  <span class="name">.<%= @command.name %></span><%= if @command.args do %> <span class="usage">[<%= @command.args %>]</span><% end %>
+  </div>
+</div>
