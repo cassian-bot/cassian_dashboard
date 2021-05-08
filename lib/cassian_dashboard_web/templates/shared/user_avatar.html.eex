@@ -8,5 +8,5 @@
             )
     </script>
 
-    <img src="" alt="" class="user_image_own" id="user_image_own" />
+    <img src="" alt="" class="user-image-own" id="user_image_own" />
 <% end %>
