@@ -1,5 +1,5 @@
 <section class="small-top-margin">
-  <input id="command-input" type="text" class="command-element-holder command-input rounded-box shadow-light" placeholder="Song/Playlist name or link...">
+  <input id="command-input" type="text" class="command-element-holder command-input rounded-box shadow-light" placeholder="Song name or link...">
   <div class="commands-landing">
     <div class="menu-select">
       <div class="menu-category rounded-box command-element-holder">
