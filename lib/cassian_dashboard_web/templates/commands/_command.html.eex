@@ -1,7 +1,7 @@
 <div class="command-box rounded-box shadow-light">
   <div class="command">
   <span class="name">.<%= @command.name %></span>
-  <%= if @command.args do %> <span class="usage <%= if @command[:placeholder], do: "placeholder" %>" value="[<%= @command.args %>]">[<%= @command.args %>]</span><% end %>
+  <%= if @command.args do %> <span class="usage <%= if @command[:placeholder], do: "placeholder" %>" placeholder="[<%= @command.args %>]">[<%= @command.args %>]</span><% end %>
   </div>
   <p class="copy-button">
     <svg xmlns="http://www.w3.org/2000/svg" class="copy-logo"><path class="copy-path" d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>

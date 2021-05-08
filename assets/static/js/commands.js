@@ -64,6 +64,10 @@ document.getElementById("command-input").onkeyup = (event) => {
     
     for(let i = 0; i < elements.length; i++) {
         const element = elements.item(i)
-        element.textContent = event.target.value;
+
+        if(event.target.value !== "")
+            element.textContent = event.target.value;
+        else
+            element.textContent = element.getAttribute('placeholder');
     }
 }
