@@ -56,11 +56,20 @@ const copyToClipboard = str => {
 
 };
 
+// In case of a placeholder
+
+let initialValue = document.getElementById("command-input").value
+
+const elements = document.getElementsByClassName('placeholder');
+
+for(let i = 0; i < elements.length; i++) {
+    const element = elements.item(i)
+    element.textContent = initialValue || element.getAttribute('placeholder');
+}
+
 document.getElementById("command-input").onkeyup = (event) => {
     console.log(event.target)
     console.log(`Key is: ${event.key}`);
-
-    const elements = document.getElementsByClassName('placeholder');
     
     for(let i = 0; i < elements.length; i++) {
         const element = elements.item(i)

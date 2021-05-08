@@ -246,6 +246,10 @@ header {
     }
 }
 
+.hidden {
+    display: none !important;
+}
+
 .user-image-own {
     height: 60px;
     border-radius: 50%;
