@@ -1,0 +1,12 @@
+<%= if (user = current_user(@conn)) do %>
+    <script>
+        fetch('<%= "/api/v1/discord/#{user.discord_id}" %>')
+            .then(response => response.json())
+            .then(data =>
+                document.getElementById('user_image_own')
+                    .src = `https://cdn.discordapp.com/avatars/${data.body.id}/${data.body.avatar}.jpg?size=2048`
+            )
+    </script>
+
+    <img src="" alt="" class="user-image-own" id="user_image_own" />
+<% end %>
