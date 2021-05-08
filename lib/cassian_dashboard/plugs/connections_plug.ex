@@ -15,9 +15,13 @@ defmodule CassianDashboard.Plugs.Connections do
   end
 
   defp connections(conn) do
-    conn
-    |> Guardian.Plug.current_resource()
-    |> Connections.connections_for_account()
-    |> Connections.key_map!()
+
+    case Guardian.Plug.current_resource(conn) do
+      nil ->
+        nil
+      account ->
+      Connections.connections_for_account(account)
+      |> Connections.key_map!()
+    end
   end
 end

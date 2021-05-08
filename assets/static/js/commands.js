@@ -25,12 +25,14 @@ document.addEventListener('click', event => {
         copyToClipboard(getStringFromP(event.target))
     } else if (event.target.matches(".copy-logo")) {
         copyToClipboard(getStringFromP(event.target.parentElement));
+    } else if (event.target.matches(".copy-path")) {
+        copyToClipboard(getStringFromP(event.target.parentElement.parentElement));
     }
 })
 
 function getStringFromP(p) {
     const element = p.parentElement;
-    return element.textContent.trim();
+    return element.innerText.trim();
 }
 
 const copyToClipboard = str => {
@@ -49,7 +51,29 @@ const copyToClipboard = str => {
     spop({
         template: 'Coppied to clipboard!',
         position  : 'top-right',
-        autoclose: 3000
+        autoclose: 2000
     });
 
 };
+
+// In case of a placeholder
+
+let initialValue = document.getElementById("command-input").value
+
+const elements = document.getElementsByClassName('placeholder');
+
+for(let i = 0; i < elements.length; i++) {
+    const element = elements.item(i)
+    element.textContent = initialValue || element.getAttribute('placeholder');
+}
+
+document.getElementById("command-input").onkeyup = (event) => {    
+    for(let i = 0; i < elements.length; i++) {
+        const element = elements.item(i)
+
+        if(event.target.value !== "")
+            element.textContent = event.target.value;
+        else
+            element.textContent = element.getAttribute('placeholder');
+    }
+}

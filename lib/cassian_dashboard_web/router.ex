@@ -31,7 +31,7 @@ defmodule CassianDashboardWeb.Router do
     get "/", PageController, :index
 
     scope "/commands" do
-      pipe_through [:ensure_auth, :connections]
+      pipe_through :connections
 
       get "/", CommandsController, :index
     end
@@ -43,6 +43,10 @@ defmodule CassianDashboardWeb.Router do
     scope "/v1", V1 do
       scope "/discord" do
         get "/:id", DiscordController, :show
+      end
+
+      scope "/spotify" do
+        get "/:id/index_playlists", SpotifyController, :index_playlists
       end
     end
   end

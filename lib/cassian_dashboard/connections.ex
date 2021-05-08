@@ -85,6 +85,20 @@ defmodule CassianDashboard.Connections do
   end
 
   @doc """
+  Get a single connection without an error.
+
+  ## Examples
+
+      iex> get_connection(123)
+      %Connection{}
+
+      iex> get_connection(456)
+      nil
+  """
+  @spec get_connection(id :: integer()) :: %Connection{} | nil
+  def get_connection(id), do: Repo.get(Connection, id)
+
+  @doc """
   Gets a single connection.
 
   Raises `Ecto.NoResultsError` if the Connection does not exist.
