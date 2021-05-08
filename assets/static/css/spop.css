@@ -122,7 +122,7 @@
 .spop--warning,
 .spop--success {
   color: #fff;
-  background-color: #454A56; }
+  background-color: #161718; }
 
 @-webkit-keyframes spopIn {
   0% {
@@ -177,8 +177,8 @@
           animation: spopOut 0.4s ease-in-out; }
 
 .spop--in {
-  -webkit-animation: spopIn 0.4s ease-in-out;
-          animation: spopIn 0.4s ease-in-out; }
+  -webkit-animation: spopIn 0.3s ease-in-out;
+          animation: spopIn 0.3s ease-in-out; }
 
 .spop-body {
   padding: 1.4em; }
@@ -233,21 +233,21 @@
 
 .spop-icon--error,
 .spop-icon--info {
-  border: 2px solid #3a95ed; }
+  border: 2px solid #67d4e2; }
   .spop-icon--error:before,
   .spop-icon--info:before {
     top: 5px;
     left: 11px;
     width: 4px;
     height: 4px;
-    background-color: #3a95ed; }
+    background-color: #67d4e2; }
   .spop-icon--error:after,
   .spop-icon--info:after {
     top: 12px;
     left: 11px;
     width: 4px;
     height: 9px;
-    background-color: #3a95ed; }
+    background-color: #67d4e2; }
 
 .spop-icon--error {
   border-color: #ff5656; }

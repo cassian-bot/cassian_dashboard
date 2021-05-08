@@ -25,12 +25,14 @@ document.addEventListener('click', event => {
         copyToClipboard(getStringFromP(event.target))
     } else if (event.target.matches(".copy-logo")) {
         copyToClipboard(getStringFromP(event.target.parentElement));
+    } else if (event.target.matches(".copy-path")) {
+        copyToClipboard(getStringFromP(event.target.parentElement.parentElement));
     }
 })
 
 function getStringFromP(p) {
     const element = p.parentElement;
-    return element.textContent.trim();
+    return element.innerText.trim();
 }
 
 const copyToClipboard = str => {
@@ -49,7 +51,19 @@ const copyToClipboard = str => {
     spop({
         template: 'Coppied to clipboard!',
         position  : 'top-right',
-        autoclose: 3000
+        autoclose: 2000
     });
 
 };
+
+document.getElementById("command-input").onkeyup = (event) => {
+    console.log(event.target)
+    console.log(`Key is: ${event.key}`);
+
+    const elements = document.getElementsByClassName('placeholder');
+    
+    for(let i = 0; i < elements.length; i++) {
+        const element = elements.item(i)
+        element.textContent = event.target.value;
+    }
+}

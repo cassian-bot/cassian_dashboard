@@ -1,6 +1,6 @@
 <%
   commands = [
-    %{name: "sudo", args: nil},
+    %{name: "sudo", args: nil, placeholder: true},
     %{name: "bamboozle", args: nil},
     %{name: "shazam", args: nil},
   ]

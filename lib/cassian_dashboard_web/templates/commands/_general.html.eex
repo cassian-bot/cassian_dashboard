@@ -4,7 +4,7 @@
     %{name: "backward", args: nil},
     %{name: "forward", args: nil},
     %{name: "next", args: nil},
-    %{name: "play", args: "song url"},
+    %{name: "play", args: "song url", placeholder: true},
     %{name: "playlist", args: nil},
     %{name: "previous", args: nil},
     %{name: "repeat", args: "one, none, all"},
