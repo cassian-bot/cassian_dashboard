@@ -3,24 +3,13 @@ defmodule CassianDashboardWeb.CommandsController do
 
   alias CassianDashboard.Connections
 
-  def index(conn, _params) do
-    commands = [
-      {"ping", nil},
-      {"backward", nil},
-      {"forward", nil},
-      {"next", nil},
-      {"play", "song url"},
-      {"playlist", nil},
-      {"previous", nil},
-      {"repeat", "one, none, all"},
-      {"shuffle", nil},
-      {"unshuffle", nil}
-    ]
+  def index(conn, params) do
+    provider = params["provider"] || "general"
 
     connections =
       Connections.connections_for_account(current_user(conn))
       |> Connections.key_map!()
 
-    render(conn, "index.html", commands: commands, connections: connections)
+    render(conn, "index.html", connections: connections, provider: provider)
   end
 end

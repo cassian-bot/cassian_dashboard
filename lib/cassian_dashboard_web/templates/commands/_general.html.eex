@@ -1,0 +1,22 @@
+<%
+    commands = [
+        {"ping", nil},
+        {"backward", nil},
+        {"forward", nil},
+        {"next", nil},
+        {"play", "song url"},
+        {"playlist", nil},
+        {"previous", nil},
+        {"repeat", "one, none, all"},
+        {"shuffle", nil},
+        {"unshuffle", nil}
+        ]
+%>
+
+<%=  for {command, caller} <- commands do %>
+    <div class="command-box rounded-box shadow-light">
+        <div class="command">
+        <span class="name">.<%= command %></span><%= if caller do %> <span class="usage">[<%= caller %>]</span><% end %>
+        </div>
+    </div>
+<% end %>

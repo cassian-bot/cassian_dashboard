@@ -2,9 +2,11 @@
   <div class="commands-landing">
     <div class="menu-select">
       <div class="menu-category rounded-box command-element-holder">
-        <div class="category-element rounded-box connection general-connection">
-          <span>General</span>
-        </div>
+        <a href="/commands">
+          <div class="category-element rounded-box connection general-connection">
+            <span>General</span>
+          </div>
+        </a>
         <a href="">
           <div id="youtube-connection" class="category-element rounded-box connection youtube-connection <%= unless @connections["youtube"], do: "not-connected" %>">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" class="logo-small">
@@ -29,13 +31,7 @@
       </div>
     </div>
     <div class="menu-commands">
-      <%=  for {command, caller} <- @commands do %>
-        <div class="command-box rounded-box shadow-light">
-          <div class="command">
-            <span class="name">.<%= command %></span><%= if caller do %> <span class="usage">[<%= caller %>]</span><% end %>
-          </div>
-        </div>
-      <% end %>
+      <%= render "_#{@provider}.html", conn: @conn, connections: @connections %>
     </div>
   </div>
   <br>
