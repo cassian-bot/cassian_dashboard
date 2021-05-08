@@ -19,3 +19,37 @@ else {
         window.location.href = '/commands?provider=youtube'
     }
 }
+
+document.addEventListener('click', event => {
+    if (event.target.matches(".copy-button")) {
+        copyToClipboard(getStringFromP(event.target))
+    } else if (event.target.matches(".copy-logo")) {
+        copyToClipboard(getStringFromP(event.target.parentElement));
+    }
+})
+
+function getStringFromP(p) {
+    const element = p.parentElement;
+    return element.textContent.trim();
+}
+
+const copyToClipboard = str => {
+    const el = document.createElement('textarea');
+    el.value = str;
+    el.setAttribute('readonly', '');
+    el.style.position = 'absolute';
+    el.style.left = '-9999px';
+    document.body.appendChild(el);
+    el.select();
+    document.execCommand('copy');
+    document.body.removeChild(el);
+
+    
+
+    spop({
+        template: 'Coppied to clipboard!',
+        position  : 'top-right',
+        autoclose: 3000
+    });
+
+};

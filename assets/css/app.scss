@@ -5,6 +5,7 @@
     --blurple: #7289DA;
     --dark-blurple: #4E5D94;
     --dark: #23272A;
+    --command-bg-color: #161718;
 }
 
 * {
@@ -315,7 +316,10 @@ section {
 }
 
 .command-box {
-    background-color: #161718;
+    background-color: var(--command-bg-color);
+    display: flex;
+    align-items: center;
+    position: relative;
 }
 
 .command {
@@ -330,4 +334,22 @@ section {
 .command > .usage {
     font-weight: 300;
     color: #afb6b8;
+}
+
+.copy-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    right: 0px;
+    height: 100%;
+    min-width: 75px;
+    min-height: 50px;
+}
+
+.copy-logo {
+    width: 24px;
+    height: 24px;
+    position: relative;
+    fill: rgb(80, 80, 80);
 }
