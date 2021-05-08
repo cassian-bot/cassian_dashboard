@@ -1,15 +1,11 @@
 defmodule CassianDashboardWeb.CommandsController do
   use CassianDashboardWeb, :controller
 
-  alias CassianDashboard.Connections
+  def index(conn, %{"provider" => "spotify"}) do
+    render(conn, "index.html", provider: "spotify")
+  end
 
-  def index(conn, params) do
-    provider = params["provider"] || "general"
-
-    connections =
-      Connections.connections_for_account(current_user(conn))
-      |> Connections.key_map!()
-
-    render(conn, "index.html", connections: connections, provider: provider)
+  def index(conn, _params) do
+    render(conn, "index.html", provider: "general")
   end
 end

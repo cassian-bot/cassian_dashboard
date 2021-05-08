@@ -9,6 +9,10 @@ defmodule CassianDashboardWeb.Router do
     plug :put_secure_browser_headers
   end
 
+  pipeline :connections do
+    plug CassianDashboard.Plugs.Connections
+  end
+
   pipeline :api do
     plug :accepts, ["json"]
   end
@@ -27,7 +31,7 @@ defmodule CassianDashboardWeb.Router do
     get "/", PageController, :index
 
     scope "/commands" do
-      pipe_through :ensure_auth
+      pipe_through [:ensure_auth, :connections]
 
       get "/", CommandsController, :index
     end
