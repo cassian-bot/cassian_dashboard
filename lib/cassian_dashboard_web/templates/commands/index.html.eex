@@ -29,13 +29,13 @@
       </div>
     </div>
     <div class="menu-commands">
-        <%=  for {command, caller} <- @commands do %>
-          <div class="command-box rounded-box shadow-light">
-            <div class="command">
-              <span class="name">.<%= command %></span><%= if caller do %> <span class="usage">[<%= caller %>]</span><% end %>
-            </div>
+      <%=  for {command, caller} <- @commands do %>
+        <div class="command-box rounded-box shadow-light">
+          <div class="command">
+            <span class="name">.<%= command %></span><%= if caller do %> <span class="usage">[<%= caller %>]</span><% end %>
           </div>
-        <% end %>
+        </div>
+      <% end %>
     </div>
   </div>
   <br>
