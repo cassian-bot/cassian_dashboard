@@ -8,7 +8,8 @@
 use Mix.Config
 
 config :cassian_dashboard,
-  ecto_repos: [CassianDashboard.Repo]
+  ecto_repos: [CassianDashboard.Repo],
+  discord_bot_token: System.get_env("DISCORD_BOT_TOKEN")
 
 # Configures the endpoint
 config :cassian_dashboard, CassianDashboardWeb.Endpoint,
