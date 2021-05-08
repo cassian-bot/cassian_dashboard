@@ -106,7 +106,10 @@ defmodule CassianDashboard.Services.SpotifyService do
   @doc """
   Get the tracks in a playlist.
   """
-  @spec playlist_tracks(connection :: %Connection{}, playlist :: %{}) :: {:ok, %{}} | {:error, :noop}
+  @spec playlist_tracks(
+    connection :: %Connection{:token => String.t()},
+    playlist :: %{:id => String.t() | integer()}
+  ) :: {:error, :noop} | {:ok, any}
   def playlist_tracks(connection, playlist) do
     id = playlist.id
 
