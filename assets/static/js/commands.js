@@ -8,3 +8,14 @@ else {
         window.location.href = '/commands?provider=spotify'
     }
 }
+
+const youtubeButton = document.getElementById('youtube-connection');
+
+if(youtubeButton.classList.contains("not-connected"))
+youtubeButton.parentElement.href = '/auth/youtube'
+else {
+    youtubeButton.parentElement.href = 'javascript:void(0)'
+    youtubeButton.onclick = () => {
+        window.location.href = '/commands?provider=youtube'
+    }
+}
