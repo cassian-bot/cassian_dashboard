@@ -172,4 +172,14 @@ defmodule CassianDashboard.Connections do
   def delete_connection(%Connection{} = connection) do
     Repo.delete(connection)
   end
+
+  @spec key_map!(connections :: [%Connection{}]) :: %{String.t() => %Connection{}}
+  @doc """
+  Reduce connections in a key-map value where the key is the connection type.
+  """
+  def key_map!(connections \\ []) do
+    Enum.reduce(connections, %{}, fn connection, acc ->
+      Map.put(acc, connection.type, connection)
+    end)
+  end
 end

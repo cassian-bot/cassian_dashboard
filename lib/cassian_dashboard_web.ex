@@ -24,6 +24,10 @@ defmodule CassianDashboardWeb do
       import Plug.Conn
       import CassianDashboardWeb.Gettext
       alias CassianDashboardWeb.Router.Helpers, as: Routes
+
+      def current_user(conn) do
+        Guardian.Plug.current_resource(conn)
+      end
     end
   end
 

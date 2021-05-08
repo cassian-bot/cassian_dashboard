@@ -266,7 +266,15 @@ section {
     fill: white;
 }
 
+.not-connected {
+    filter: saturate(0)
+}
+
 // Specific connections
+
+.general-connection {
+    background-color: var(--blurple);
+}
 
 .youtube-connection {
     background-color:  red;
