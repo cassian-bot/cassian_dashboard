@@ -117,7 +117,6 @@ defmodule CassianDashboard.Connections do
     params = Connection.params_from_oauth(auth)
 
     (connection_for_account(account, params.type) || %Connection{account_id: account.id})
-    |> IO.inspect(label: "Connection")
     |> Connection.changeset(params)
     |> Repo.insert_or_update()
   end

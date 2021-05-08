@@ -20,7 +20,6 @@ defmodule CassianDashboardWeb.CommandsController do
     connections =
       Connections.connections_for_account(current_user(conn))
       |> Connections.key_map!()
-      |> IO.inspect(label: "Connections")
 
     render(conn, "index.html", commands: commands, connections: connections)
   end

@@ -17,11 +17,8 @@ defmodule CassianDashboardWeb.Login.SpotifyController do
   end
 
   def callback(%{assigns: %{ueberauth_auth: auth}} = conn, _params) do
-    IO.inspect(auth, label: "Spotify auth info")
-
     Guardian.Plug.current_resource(conn)
     |> Connections.create_or_update(auth)
-    |> IO.inspect(label: "Spotify connection")
 
     conn
     |> redirect(to: "/")
