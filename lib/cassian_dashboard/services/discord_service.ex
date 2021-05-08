@@ -23,4 +23,12 @@ defmodule CassianDashboard.DiscordService do
         {:error, %{}}
     end
   end
+
+  @doc """
+  Get the image for the user, just a string parser.
+  """
+  @spec user_image!(user_id :: String.t(), image_id :: String.t()) :: String.t()
+  def user_image!(user_id, image_id) do
+    "https://cdn.discordapp.com/avatars/#{user_id}/#{image_id}.jpg"
+  end
 end

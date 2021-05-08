@@ -97,6 +97,9 @@ header {
 
 .button-logout {
     background-color: #df294d;
+    background-repeat: "no-repeat";
+    background-size: 100%;
+    background-position-y: 50%;
 }
 
 .button-logout:hover {
@@ -126,6 +129,13 @@ header {
     50% {background-position: 100% 50%;}
 
     100% {background-position: 0 50%;}
+}
+
+.user_image_own {
+    height: 60px;
+    border-radius: 50%;
+    position: absolute;
+    right: 20px;
 }
 
 /* Everything regarding the main landing page */
