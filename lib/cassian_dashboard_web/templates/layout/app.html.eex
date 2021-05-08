@@ -19,7 +19,7 @@
           <ul class="nav-links">
             <li><a class="underline-link" href="/">Home</a></li>
             <li><a class="underline-link" href="<%= Routes.commands_path(@conn, :index) %>">Commands</a></li>
-            <li><a class="underline-link" href="https://github.com/zastrixarundell/cassian" target="_blank">Code</a></li>
+            <li><a class="underline-link" href="https://github.com/cassian-bot" target="_blank">Code</a></li>
           </ul>
         </nav>
         <%= render_shared "session_control_button.html", conn: @conn %>
