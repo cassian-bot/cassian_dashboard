@@ -5,6 +5,6 @@ if(spotifyButton.classList.contains("not-connected"))
 else {
     spotifyButton.parentElement.href = 'javascript:void(0)'
     spotifyButton.onclick = () => {
-        window.location.href = '/commands#spotify'
+        window.location.href = '/commands/spotify'
     }
 }
