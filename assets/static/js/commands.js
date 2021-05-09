@@ -7,6 +7,15 @@ let authenticatedError = () => {
     }); 
 }
 
+let unimplemented = () => {
+    spop({
+        template: 'Connection not yet implemented!',
+        position  : 'top-right',
+        autoclose: 2000,
+        style: 'error'
+    }); 
+}
+
 function setupButton(buttonName) {
     const button = document.getElementById(`${buttonName}-connection`);
 
@@ -14,8 +23,12 @@ function setupButton(buttonName) {
         if (button.classList.contains("unauthenticated")) {
             button.onclick = authenticatedError;
             button.parentElement.onclick = (event) => event.preventDefault();
-        } else
-        button.parentElement.href = `/auth/${buttonName}`
+        } else if (buttonName != 'spotify') {
+            button.onclick = unimplemented;
+            button.parentElement.onclick = (event) => event.preventDefault();
+        }
+        else
+            button.parentElement.href = `/auth/${buttonName}`
     else
     button.parentElement.href = `/commands?provider=${buttonName}`;
 }
