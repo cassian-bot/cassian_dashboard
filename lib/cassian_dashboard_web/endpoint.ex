@@ -23,7 +23,7 @@ defmodule CassianDashboardWeb.Endpoint do
     at: "/",
     from: :cassian_dashboard,
     gzip: false,
-    only: ~w(css fonts images js favicon.ico robots.txt)
+    only: ~w(css fonts images js favicon.ico robots.txt svg)
 
   # Code reloading can be explicitly enabled under the
   # :code_reloader configuration of your endpoint.
