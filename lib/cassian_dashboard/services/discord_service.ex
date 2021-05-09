@@ -19,6 +19,7 @@ defmodule CassianDashboard.DiscordService do
     case HTTPoison.get(link, headers) do
       {:ok, %HTTPoison.Response{body: body, status_code: 200}} ->
         {:ok, body |> Jason.decode!()}
+
       _ ->
         {:error, %{}}
     end

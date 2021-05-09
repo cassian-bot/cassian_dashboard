@@ -72,7 +72,8 @@ defmodule CassianDashboard.Services.SpotifyService do
   @doc """
   Get the playlists for a connection. Default limit is 10.
   """
-  @spec get_playlists(connection :: %Connection{}, limit :: integer()) :: {:ok, [%{}]} | {:error, :noop}
+  @spec get_playlists(connection :: %Connection{}, limit :: integer()) ::
+          {:ok, [%{}]} | {:error, :noop}
   def get_playlists(connection, limit \\ 10) do
     headers = generate_user_headers(connection)
 
@@ -90,7 +91,8 @@ defmodule CassianDashboard.Services.SpotifyService do
   @doc """
   Search through the user playlists. Finds one which is the most similar in name.
   """
-  @spec search_playlist(connection :: %Connection{}, query :: String.t()) :: {:ok, %{}} | {:error, :noop}
+  @spec search_playlist(connection :: %Connection{}, query :: String.t()) ::
+          {:ok, %{}} | {:error, :noop}
   def search_playlist(connection, query) do
     headers = generate_user_headers(connection)
 
@@ -107,9 +109,9 @@ defmodule CassianDashboard.Services.SpotifyService do
   Get the tracks in a playlist.
   """
   @spec playlist_tracks(
-    connection :: %Connection{:token => String.t()},
-    playlist :: %{:id => String.t() | integer()}
-  ) :: {:error, :noop} | {:ok, any}
+          connection :: %Connection{:token => String.t()},
+          playlist :: %{:id => String.t() | integer()}
+        ) :: {:error, :noop} | {:ok, any}
   def playlist_tracks(connection, playlist) do
     id = playlist.id
 
