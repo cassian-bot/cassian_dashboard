@@ -44,6 +44,10 @@ defmodule CassianDashboardWeb.Router do
       scope "/discord" do
         get "/:id", DiscordController, :show
       end
+
+      scope "/spotify" do
+        get "/:id/index_playlists", SpotifyController, :index_playlists
+      end
     end
   end
 

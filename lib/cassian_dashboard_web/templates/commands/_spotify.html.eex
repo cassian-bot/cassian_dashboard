@@ -7,3 +7,9 @@
 %>
 
 <%= render_many commands, CassianDashboardWeb.CommandsView, "_command.html", as: :command %>
+
+<script>
+  let spotify_id = <%= Map.get(@connections["spotify"] || %{}, :id) %>
+</script>
+
+<script src="<%= Routes.static_path(@conn, "/js/commands/spotify.js") %>"></script>
