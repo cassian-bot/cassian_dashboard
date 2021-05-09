@@ -31,12 +31,14 @@ config :phoenix, :json_library, Jason
 config :ueberauth, Ueberauth,
   base_path: "/auth",
   providers: [
-    discord: {Ueberauth.Strategy.Discord, []},
+    discord: { Ueberauth.Strategy.Discord, [] },
     spotify:
-      {Ueberauth.Strategy.Spotify,
-       [
-         default_scope: "playlist-read-private,user-library-read"
-       ]}
+      {
+        Ueberauth.Strategy.Spotify,
+        [
+          default_scope: "playlist-read-private,user-library-read"
+        ]
+      }
   ]
 
 # Added here as we'll need it in both dev and prod
@@ -52,6 +54,23 @@ config :ueberauth, Ueberauth.Strategy.Spotify.OAuth,
 config :cassian_dashboard, CassianDashboard.Accounts.Guardian,
   issuer: :cassian_dashboard,
   ttl: {7, :days}
+
+# Setup redis jobs
+config :exq,
+  name: Exq,
+  host: System.get_env("REDIS_HOST"),
+  port: System.get_env("REDIS_PORT"),
+  password: System.get_env("REDIS_PASSWORD"),
+  namespace: "exq",
+  concurrency: :infinite,
+  queues: ["connection"],
+  poll_timeout: 50,
+  scheduler_poll_timeout: 200,
+  scheduler_enable: true,
+  max_retries: 25,
+  mode: :default,
+  shutdown_timeout: 5000
+
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
