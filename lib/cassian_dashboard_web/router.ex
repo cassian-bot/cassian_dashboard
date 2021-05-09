@@ -31,7 +31,7 @@ defmodule CassianDashboardWeb.Router do
     get "/", PageController, :index
 
     scope "/commands" do
-      pipe_through [:ensure_auth, :connections]
+      pipe_through :connections
 
       get "/", CommandsController, :index
     end

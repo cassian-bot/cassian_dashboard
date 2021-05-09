@@ -1,8 +1,9 @@
 fetch(`/api/v1/spotify/${spotify_id}/index_playlists`)
     .then(response => response.json())
     .then(data => {
-        if(data.length <= 0) return;
+        if(data.length <= 0 || data.length == undefined) return;
 
+        console.log(data.length);
         holder = document.getElementById("playlists");
 
         holder.classList.remove('hidden');
