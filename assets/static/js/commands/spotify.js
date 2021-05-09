@@ -11,10 +11,12 @@ fetch(`/api/v1/spotify/${spotify_id}/index_playlists`)
             playlist = data[i];
 
             const new_element = document.createElement('p');
-            new_element.classList.add("rounded-box", "category-element", "command-category");
+            new_element.classList.add("rounded-box", "category-element", "command-category", "playlist");
             new_element.textContent = data[i].name;
             new_element.onclick = () => {
-                window.location.href = `/commands?provider=spotify&placeholder=${data[i].link}`
+                input = document.getElementById("command-input");
+                input.value = data[i].link;
+                input.dispatchEvent(new Event('keyup'));
             }
             
             holder.appendChild(new_element);
