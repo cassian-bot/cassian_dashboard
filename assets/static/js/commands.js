@@ -1,5 +1,3 @@
-const spotifyButton = document.getElementById('spotify-connection');
-
 let authenticatedError = () => {
     spop({
         template: 'You need to be authenticated to perform this action!',
@@ -9,25 +7,22 @@ let authenticatedError = () => {
     }); 
 }
 
-if(spotifyButton.classList.contains("not-connected"))
-    if (spotifyButton.classList.contains("unauthenticated")) {
-        spotifyButton.onclick = authenticatedError;
-        spotifyButton.parentElement.onclick = (event) => event.preventDefault();
-    } else
-        spotifyButton.parentElement.href = '/auth/spotify'
-else
-    spotifyButton.parentElement.href = '/commands?provider=spotify';
+function setupButton(buttonName) {
+    const button = document.getElementById(`${buttonName}-connection`);
 
-const youtubeButton = document.getElementById('youtube-connection');
+    if(button.classList.contains("not-connected"))
+        if (button.classList.contains("unauthenticated")) {
+            button.onclick = authenticatedError;
+            button.parentElement.onclick = (event) => event.preventDefault();
+        } else
+        button.parentElement.href = `/auth/${buttonName}`
+    else
+    button.parentElement.href = `/commands?provider=${buttonName}`;
+}
 
-if(youtubeButton.classList.contains("not-connected"))
-    if (youtubeButton.classList.contains("unauthenticated")) {
-        youtubeButton.onclick = authenticatedError;
-        youtubeButton.parentElement.onclick = (event) => event.preventDefault();
-    } else
-        youtubeButton.parentElement.href = '/auth/youtube'
-else
-    youtubeButton.parentElement.href = '/commands?provider=youtube';
+setupButton('youtube');
+setupButton('spotify');
+setupButton('soundcloud');
 
 document.addEventListener('click', event => {
     if (event.target.matches(".copy-button")) {

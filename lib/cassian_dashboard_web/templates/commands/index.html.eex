@@ -25,7 +25,7 @@
           </div>
         </a>
         <a href="">
-          <div id="soundcloud-connection" class="category-element rounded-box connection soundcloud-connection <%= unless @connections["spotify"], do: "not-connected" %>  <%= unless current_user(@conn), do: "unauthenticated" %>">
+          <div id="soundcloud-connection" class="category-element rounded-box connection soundcloud-connection <%= unless @connections["soundcloud"], do: "not-connected" %>  <%= unless current_user(@conn), do: "unauthenticated" %>">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24px 24px" class="logo-small">
               <image xlink:href="<%= Routes.static_path(@conn, "/svg/soundcloud-white.svg") %>" width="24px" height="24px" />
             </svg>
