@@ -25,7 +25,8 @@ defmodule CassianDashboard.MixProject do
         :runtime_tools,
         :ueberauth_discord,
         :ueberauth_spotify,
-        :httpoison
+        :httpoison,
+        :exq
       ]
     ]
   end
