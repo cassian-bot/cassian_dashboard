@@ -1,14 +1,31 @@
 const spotifyButton = document.getElementById('spotify-connection');
 
+let authenticatedError = () => {
+    spop({
+        template: 'You need to be authenticated to perform this action!',
+        position  : 'top-right',
+        autoclose: 2000,
+        style: 'error'
+    }); 
+}
+
 if(spotifyButton.classList.contains("not-connected"))
-    spotifyButton.parentElement.href = '/auth/spotify'
+    if (spotifyButton.classList.contains("unauthenticated")) {
+        spotifyButton.onclick = authenticatedError;
+        spotifyButton.parentElement.onclick = (event) => event.preventDefault();
+    } else
+        spotifyButton.parentElement.href = '/auth/spotify'
 else
     spotifyButton.parentElement.href = '/commands?provider=spotify';
 
 const youtubeButton = document.getElementById('youtube-connection');
 
 if(youtubeButton.classList.contains("not-connected"))
-    youtubeButton.parentElement.href = '/auth/youtube';
+    if (youtubeButton.classList.contains("unauthenticated")) {
+        youtubeButton.onclick = authenticatedError;
+        youtubeButton.parentElement.onclick = (event) => event.preventDefault();
+    } else
+        youtubeButton.parentElement.href = '/auth/youtube'
 else
     youtubeButton.parentElement.href = '/commands?provider=youtube';
 
