@@ -30,7 +30,7 @@
           <p class="rounded-box category-element command-category"><%= x %></p>
         <% end %>
       </div>
-      <div class="menu-category rounded-box command-categories command-element-holder hidden"></div>
+      <div id="playlists" class="menu-category rounded-box command-categories command-element-holder hidden"></div>
     </div>
     <div class="menu-commands">
       <%= render "_#{@provider}.html", conn: @conn, connections: @connections %>
