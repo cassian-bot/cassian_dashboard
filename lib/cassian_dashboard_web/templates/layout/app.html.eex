@@ -8,7 +8,9 @@
     <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/app.css") %>"/>
     <link rel="icon" href="<% Routes.static_path(@conn, "/favicon.ico") %>">
     <link rel="stylesheet" href="https://cdn.iconmonstr.com/1.3.0/css/iconmonstr-iconic-font.min.css">
+    <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/spop.css") %>">
     <script defer type="text/javascript" src="<%= Routes.static_path(@conn, "/js/app.js") %>"></script>
+    <script defer type="text/javascript" src="<%= Routes.static_path(@conn, "/js/spop.js") %>"></script>
   </head>
   <body>
     <header>
@@ -17,10 +19,11 @@
           <ul class="nav-links">
             <li><a class="underline-link" href="/">Home</a></li>
             <li><a class="underline-link" href="<%= Routes.commands_path(@conn, :index) %>">Commands</a></li>
-            <li><a class="underline-link" href="https://github.com/zastrixarundell/cassian" target="_blank">Code</a></li>
+            <li><a class="underline-link" href="https://github.com/cassian-bot" target="_blank">Code</a></li>
           </ul>
         </nav>
         <%= render_shared "session_control_button.html", conn: @conn %>
+        <%= render_shared "user_avatar.html", conn: @conn %>
     </header>
     <main role="main" class="container">
       <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>

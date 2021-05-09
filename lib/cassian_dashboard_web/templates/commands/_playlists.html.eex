@@ -1,0 +1,9 @@
+<%= unless Enum.empty? @playlists do %>
+  <div id="playlists" class="menu-category rounded-box command-categories command-element-holder">
+    <%= for playlist <- @playlists do %>
+      <p class="rounded-box category-element <%= "#{@provider}-connection" %> playlist" src="<%= playlist.link %>"><%= playlist.name %></p>
+    <% end %>
+  </div>
+
+  <script src="<%= Routes.static_path(@conn, "/js/playlists.js") %>"></script>
+<% end %>

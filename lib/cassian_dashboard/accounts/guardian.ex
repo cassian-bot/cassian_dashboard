@@ -20,7 +20,6 @@ defmodule CassianDashboard.Accounts.Guardian do
       _ ->
         {:error, :invalid_call}
     end
-
   rescue
     Ecto.NoResultsError -> {:error, :resource_not_found}
   end

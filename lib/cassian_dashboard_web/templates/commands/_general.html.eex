@@ -1,0 +1,16 @@
+<%
+  commands = [
+    %{name: "ping", args: nil},
+    %{name: "backward", args: nil},
+    %{name: "forward", args: nil},
+    %{name: "next", args: nil},
+    %{name: "play", args: "song url", placeholder: true},
+    %{name: "playlist", args: nil},
+    %{name: "previous", args: nil},
+    %{name: "repeat", args: "one, none, all"},
+    %{name: "shuffle", args: nil},
+    %{name: "unshuffle", args: nil}
+  ]
+%>
+
+<%= render_many commands, CassianDashboardWeb.CommandsView, "_command.html", as: :command %>

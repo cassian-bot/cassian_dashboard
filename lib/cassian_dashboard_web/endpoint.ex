@@ -7,7 +7,8 @@ defmodule CassianDashboardWeb.Endpoint do
   @session_options [
     store: :cookie,
     key: "_cassian_dashboard_key",
-    signing_salt: "sJgrPrn0"
+    signing_salt: "sJgrPrn0",
+    max_age: 60 * 60 * 24 * 7
   ]
 
   socket "/socket", CassianDashboardWeb.UserSocket,
@@ -22,7 +23,7 @@ defmodule CassianDashboardWeb.Endpoint do
     at: "/",
     from: :cassian_dashboard,
     gzip: false,
-    only: ~w(css fonts images js favicon.ico robots.txt)
+    only: ~w(css fonts images js favicon.ico robots.txt svg)
 
   # Code reloading can be explicitly enabled under the
   # :code_reloader configuration of your endpoint.

@@ -42,7 +42,6 @@ defmodule CassianDashboard.Accounts do
     |> Repo.update()
   end
 
-
   @doc """
   Returns an `%Ecto.Changeset{}` for tracking account changes.
 
