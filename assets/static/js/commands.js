@@ -67,10 +67,7 @@ for(let i = 0; i < elements.length; i++) {
     element.textContent = initialValue || element.getAttribute('placeholder');
 }
 
-document.getElementById("command-input").onkeyup = (event) => {
-    console.log(event.target)
-    console.log(`Key is: ${event.key}`);
-    
+document.getElementById("command-input").onkeyup = (event) => {    
     for(let i = 0; i < elements.length; i++) {
         const element = elements.item(i)
 
