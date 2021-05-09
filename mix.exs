@@ -53,7 +53,8 @@ defmodule CassianDashboard.MixProject do
       {:ueberauth_discord, "~> 0.5.2"},
       {:ueberauth_spotify, "0.2.1"},
       {:guardian, "~> 2.0"},
-      {:httpoison, "~> 1.8"}
+      {:httpoison, "~> 1.8"},
+      {:exq, "~> 0.14.0"}
     ]
   end
 
