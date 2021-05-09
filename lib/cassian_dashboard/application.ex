@@ -14,9 +14,13 @@ defmodule CassianDashboard.Application do
       # Start the PubSub system
       {Phoenix.PubSub, name: CassianDashboard.PubSub},
       # Start the Endpoint (http/https)
-      CassianDashboardWeb.Endpoint
+      CassianDashboardWeb.Endpoint,
       # Start a worker by calling: CassianDashboard.Worker.start_link(arg)
       # {CassianDashboard.Worker, arg}
+      %{
+        id: Exq,
+        start: {Exq, :start_link, []}
+      }
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

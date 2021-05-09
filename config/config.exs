@@ -63,13 +63,14 @@ config :exq,
   password: System.get_env("REDIS_PASSWORD"),
   namespace: "exq",
   concurrency: :infinite,
-  queues: ["connection"],
+  queues: ["spotify"],
   poll_timeout: 50,
   scheduler_poll_timeout: 200,
   scheduler_enable: true,
   max_retries: 25,
   mode: :default,
-  shutdown_timeout: 5000
+  shutdown_timeout: 5000,
+  start_on_application: false
 
 
 # Import environment specific config. This must remain at the bottom

@@ -48,14 +48,14 @@ defmodule CassianDashboard.Services.SpotifyService do
   the connection is deleted.
   """
   @spec reauthorize_and_edit(connection :: %Connection{}) ::
-          {:ok, %Connection{}} | {:error, %Ecto.Changeset{}}
+          {:ok, {:ok, %Connection{}} | {:error, %Ecto.Changeset{}}} | {:delete, {:ok, %Connection{}} | {:error, %Ecto.Changeset{}}}
   def reauthorize_and_edit(connection) do
     case reauthorize(connection) do
       {:ok, %{access_token: token}} ->
-        Connections.update_connection(connection, %{token: token})
+        {:ok, Connections.update_connection(connection, %{token: token})}
 
       {:error, _code} ->
-        Connections.delete_connection(connection)
+        {:delete, Connections.delete_connection(connection)}
     end
   end
 
