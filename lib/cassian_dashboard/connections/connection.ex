@@ -7,6 +7,7 @@ defmodule CassianDashboard.Connections.Connection do
     field :token, :string
     field :type, :string
     field :account_id, :integer
+    field :jid, :string
 
     timestamps()
   end
@@ -14,7 +15,7 @@ defmodule CassianDashboard.Connections.Connection do
   @doc false
   def changeset(connection, attrs) do
     connection
-    |> cast(attrs, [:type, :token, :refresh_token])
+    |> cast(attrs, [:type, :token, :refresh_token, :jid])
     |> validate_required([:type, :token, :refresh_token])
     |> unique_constraint(:unique_user_connection, name: :unique_connection)
   end

@@ -12,6 +12,13 @@ defmodule CassianDashboard.Workers.SpotifyWorker do
     |> reauthorize_or_delete()
   end
 
+  def enqueue(connection) do
+    case Exq.enqueue_in(Exq, "spotify", 300, __MODULE__ |> to_string(), [connection.id]) do
+      {:ok, jid} ->
+        Connections.update_connection(connection, %{jid: jid})
+    end
+  end
+
   @spec reauthorize_or_delete(connection :: %Connection{} | nil) :: nil | {:ok, pid()}
   def reauthorize_or_delete(nil), do: nil
 
@@ -19,8 +26,7 @@ defmodule CassianDashboard.Workers.SpotifyWorker do
     case SpotifyService.reauthorize_and_edit(connection) do
       {:ok, {:ok, _}} ->
         # Redo everything after 50 minutes.
-        Exq.enqueue_in(Exq, "spotify", 300, __MODULE__ |> to_string(), [connection.id])
-        # TODO: Add logic so the JID is saved in the connection, so that it can be deleted if the connection is removed.
+        enqueue(connection)
     end
   end
 end
