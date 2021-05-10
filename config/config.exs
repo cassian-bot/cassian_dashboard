@@ -37,7 +37,8 @@ config :ueberauth, Ueberauth,
       [
         default_scope: "playlist-read-private,user-library-read"
       ]
-    }
+    },
+    google: {Ueberauth.Strategy.Google, []}
   ]
 
 # Added here as we'll need it in both dev and prod
@@ -49,6 +50,11 @@ config :ueberauth, Ueberauth.Strategy.Discord.OAuth,
 config :ueberauth, Ueberauth.Strategy.Spotify.OAuth,
   client_id: System.get_env("SPOTIFY_CLIENT_ID"),
   client_secret: System.get_env("SPOTIFY_CLIENT_SECRET")
+
+# Added here as we'll need it in both dev and prod
+config :ueberauth, Ueberauth.Strategy.Google.OAuth,
+client_id: System.get_env("GOOGLE_CLIENT_ID"),
+client_secret: System.get_env("GOOGLE_CLIENT_SECRET")
 
 config :cassian_dashboard, CassianDashboard.Accounts.Guardian,
   issuer: :cassian_dashboard,
