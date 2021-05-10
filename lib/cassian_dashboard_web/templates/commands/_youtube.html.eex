@@ -1,0 +1,8 @@
+<%
+  commands = [
+    %{name: "playlist", args: "playlist url", placeholder: true},
+    %{name: "play", args: "song url", placeholder: true}
+  ]
+%>
+
+<%= render_many commands, CassianDashboardWeb.CommandsView, "_command.html", as: :command %>
