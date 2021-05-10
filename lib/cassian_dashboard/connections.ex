@@ -137,7 +137,9 @@ defmodule CassianDashboard.Connections do
 
     case resp do
       {:ok, connection} ->
-        :"Elixir.CassianDashboard.Workers.#{String.capitalize(connection.type)}Worker".enqueue(connection)
+        :"Elixir.CassianDashboard.Workers.#{String.capitalize(connection.type)}Worker".enqueue(
+          connection
+        )
     end
 
     resp

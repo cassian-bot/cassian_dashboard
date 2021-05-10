@@ -4,12 +4,12 @@
     <div class="menu-select">
       <div class="menu-category rounded-box command-element-holder">
         <a href="/commands">
-          <div class="category-element rounded-box connection general-connection">
+          <div class="category-element rounded-box connection general-connection <%= @general_classes %>">
             <span>General</span>
           </div>
         </a>
         <a href="">
-          <div id="youtube-connection" class="category-element rounded-box connection youtube-connection <%= unless @connections["youtube"], do: "not-connected" %>  <%= unless current_user(@conn), do: "unauthenticated" %>">
+          <div id="youtube-connection" class="category-element rounded-box connection <%= @youtube_classes %> <%= @all %>">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24px 24px" class="logo-small">
               <image xlink:href="<%= Routes.static_path(@conn, "/svg/youtube-white.svg") %>" width="24px" height="24px" />
             </svg>
@@ -17,7 +17,7 @@
           </div>
         </a>
         <a href="">
-          <div id="spotify-connection" class="category-element rounded-box connection spotify-connection <%= unless @connections["spotify"], do: "not-connected" %>  <%= unless current_user(@conn), do: "unauthenticated" %>">
+          <div id="spotify-connection" class="category-element rounded-box connection spotify-connection <%= @spotify_classes %> <%= @all %>">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0px 0px 24px 24px" class="logo-small">
               <image xlink:href="<%= Routes.static_path(@conn, "/svg/spotify-white.svg") %>" width="24px" height="24px" />
             </svg>
@@ -25,7 +25,7 @@
           </div>
         </a>
         <a href="" hidden>
-          <div id="soundcloud-connection" class="category-element rounded-box connection soundcloud-connection <%= unless @connections["soundcloud"], do: "not-connected" %>  <%= unless current_user(@conn), do: "unauthenticated" %>">
+          <div id="soundcloud-connection" class="category-element rounded-box connection soundcloud-connection <%= @soundcloud_classes %> <%= @all %>">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24px 24px" class="logo-small">
               <image xlink:href="<%= Routes.static_path(@conn, "/svg/soundcloud-white.svg") %>" width="24px" height="24px" />
             </svg>

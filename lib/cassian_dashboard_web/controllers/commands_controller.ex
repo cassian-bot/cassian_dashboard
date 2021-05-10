@@ -5,15 +5,27 @@ defmodule CassianDashboardWeb.CommandsController do
 
   defguardp real_provider(provider) when provider in ["spotify", "general", "youtube"]
 
+  # Controller stuff
+
   def index(conn, %{"provider" => provider}) when real_provider(provider) do
-    render(conn, "index.html",
-      provider: provider,
-      playlists: get_playlist(conn, provider |> String.to_atom())
+    IO.inspect(conn.assigns, label: "Assings")
+
+    render(
+      conn,
+      "index.html",
+      [
+        provider: provider,
+        playlists: get_playlist(conn, provider |> String.to_atom())
+      ] ++ provider_key_list(conn, provider)
     )
   end
 
   def index(conn, _) do
-    render(conn, "index.html", provider: "general", playlists: [])
+    render(
+      conn,
+      "index.html",
+      [provider: "general", playlists: []] ++ provider_key_list(conn, "general")
+    )
   end
 
   @doc """
@@ -41,4 +53,48 @@ defmodule CassianDashboardWeb.CommandsController do
   end
 
   def get_playlist(_conn, _), do: []
+
+  # Functions which generate classes for providers, really only has
+  # value with css, otherwise doesn't affect any data
+
+  defp provider_key_list(conn, provider) do
+    user = current_user(conn)
+
+    all =
+      if user do
+        []
+      else
+        "unauthenticated"
+      end
+
+    # The values are set via the `CassianDashboard.Plugs.Connections` plug!
+    connections = conn.assigns.connections
+
+    ["spotify", "soundcloud", "youtube", "general"]
+    |> Enum.reduce([all: all], &provider_class(&1, &2, connections, provider))
+    |> IO.inspect(label: "Classes")
+  end
+
+  defp provider_class(provider, acc, connections, current_provider) do
+    classes =
+      (connection_class(connections, provider) ++ selected_class(provider, current_provider))
+      |> Enum.join(" ")
+
+    Keyword.put(acc, :"#{provider}_classes", classes)
+  end
+
+  defp connection_class(_connections, "general"), do: []
+
+  defp connection_class(connections, provider) do
+    if connections[provider] do
+      []
+    else
+      ["not-connected"]
+    end
+  end
+
+  defp selected_class(one, two) when one == two,
+    do: ["selected-connection"]
+
+  defp selected_class(_one, _two), do: []
 end

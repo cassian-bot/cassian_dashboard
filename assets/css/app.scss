@@ -386,8 +386,12 @@ section {
 .connection {
     position: relative;
     font-weight: 500;
-    border-left: 5px solid;
     border-right: 5px solid transparent;
+    border-left: 5px solid transparent;
+}
+
+.selected-connection {
+    border-left: 5px solid;
 }
 
 .logo-small {
@@ -404,7 +408,7 @@ section {
 // Specific connections
 
 .general-connection {
-    background-color: var(--blurple);
+    background-color: #6495ED;
 }
 
 .youtube-connection {
@@ -423,6 +427,11 @@ section {
 
 .playlist {
     font-weight: 500;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+}
+
+.selected-playlist {
     border-right: 5px solid;
 }
 

@@ -31,14 +31,13 @@ config :phoenix, :json_library, Jason
 config :ueberauth, Ueberauth,
   base_path: "/auth",
   providers: [
-    discord: { Ueberauth.Strategy.Discord, [] },
-    spotify:
-      {
-        Ueberauth.Strategy.Spotify,
-        [
-          default_scope: "playlist-read-private,user-library-read"
-        ]
-      }
+    discord: {Ueberauth.Strategy.Discord, []},
+    spotify: {
+      Ueberauth.Strategy.Spotify,
+      [
+        default_scope: "playlist-read-private,user-library-read"
+      ]
+    }
   ]
 
 # Added here as we'll need it in both dev and prod
@@ -71,7 +70,6 @@ config :exq,
   mode: :default,
   shutdown_timeout: 5000,
   start_on_application: false
-
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
