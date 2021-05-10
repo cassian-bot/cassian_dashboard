@@ -25,10 +25,10 @@
         <%= render_shared "session_control_button.html", conn: @conn %>
         <%= render_shared "user_avatar.html", conn: @conn %>
     </header>
-    <main role="main" class="container">
+    <div class="wave rainbow"></div>
+    <main id="main-content" role="main" class="container">
       <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
       <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
-      <div class="wave rainbow"></div>
       <%= @inner_content %>
     </main>
   </body>

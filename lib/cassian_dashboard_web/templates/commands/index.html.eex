@@ -9,7 +9,7 @@
           </div>
         </a>
         <a href="">
-          <div id="youtube-connection" class="category-element rounded-box connection <%= @youtube_classes %> <%= @all %>">
+          <div id="youtube-connection" class="category-element rounded-box connection youtube-connection <%= @youtube_classes %> <%= @all %>">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24px 24px" class="logo-small">
               <image xlink:href="<%= Routes.static_path(@conn, "/svg/youtube-white.svg") %>" width="24px" height="24px" />
             </svg>
@@ -24,7 +24,7 @@
             <span>Spotify</span>
           </div>
         </a>
-        <a href="" hidden>
+        <a href="">
           <div id="soundcloud-connection" class="category-element rounded-box connection soundcloud-connection <%= @soundcloud_classes %> <%= @all %>">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24px 24px" class="logo-small">
               <image xlink:href="<%= Routes.static_path(@conn, "/svg/soundcloud-white.svg") %>" width="24px" height="24px" />

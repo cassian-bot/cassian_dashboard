@@ -257,6 +257,15 @@ header {
     right: 20px;
 }
 
+.container {
+    animation: fadeIn linear 0.2s;
+}
+
+@keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
 /* Everything regarding the main landing page */
 
 section {
@@ -408,7 +417,7 @@ section {
 // Specific connections
 
 .general-connection {
-    background-color: #6495ED;
+    background-color: #786cc7;
 }
 
 .youtube-connection {
