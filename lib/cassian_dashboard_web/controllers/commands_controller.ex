@@ -6,14 +6,51 @@ defmodule CassianDashboardWeb.CommandsController do
   defguardp real_provider(provider) when provider in ["spotify", "general", "youtube"]
 
   def index(conn, %{"provider" => provider}) when real_provider(provider) do
+    IO.inspect(conn.assigns, label: "Assings")
     render(conn, "index.html",
-      provider: provider,
-      playlists: get_playlist(conn, provider |> String.to_atom())
+      [
+        provider: provider,
+        playlists: get_playlist(conn, provider |> String.to_atom())
+      ] ++ provider_key_list(conn, provider)
     )
   end
 
   def index(conn, _) do
-    render(conn, "index.html", provider: "general", playlists: [])
+    render(conn, "index.html", [provider: "general", playlists: []] ++ provider_key_list(conn, "general"))
+  end
+
+  defp provider_key_list(conn, provider) do
+    user = current_user(conn)
+
+    all =
+      if user do
+        []
+      else
+        "unauthenticated"
+      end
+
+    # The values are set via the `CassianDashboard.Plugs.Connections` plug!
+    connections = conn.assigns.connections
+
+    ["spotify", "soundcloud", "youtube", "general"]
+    |> Enum.reduce([all: all], &provider_class(&1, &2, connections, provider))
+    |> IO.inspect(label: "Classes")
+  end
+
+  defp provider_class(provider, acc, connections, current_provider) do
+    classes =
+      if connections[provider] || provider == "general" do
+        []
+      else
+        ["not-connected"]
+      end ++ if current_provider == provider do
+        ["selected-connection"]
+      else
+        []
+      end
+      |> Enum.join(" ")
+
+    Keyword.put(acc, :"#{provider}_classes", classes)
   end
 
   @doc """
