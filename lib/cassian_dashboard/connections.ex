@@ -130,9 +130,17 @@ defmodule CassianDashboard.Connections do
   def create_or_update(account, auth) do
     params = Connection.params_from_oauth(auth)
 
-    (connection_for_account(account, params.type) || %Connection{account_id: account.id})
-    |> Connection.changeset(params)
-    |> Repo.insert_or_update()
+    resp =
+      (connection_for_account(account, params.type) || %Connection{account_id: account.id})
+      |> Connection.changeset(params)
+      |> Repo.insert_or_update()
+
+    case resp do
+      {:ok, connection} ->
+        :"Elixir.CassianDashboard.Workers.#{String.capitalize(connection.type)}Worker".enqueue(connection)
+    end
+
+    resp
   end
 
   @doc """
@@ -171,7 +179,7 @@ defmodule CassianDashboard.Connections do
   end
 
   @doc """
-  Deletes a connection.
+  Deletes a connection. Also deleted the sheduled job.
 
   ## Examples
 
@@ -183,7 +191,9 @@ defmodule CassianDashboard.Connections do
 
   """
   def delete_connection(%Connection{} = connection) do
-    Repo.delete(connection)
+    data = Repo.delete(connection)
+    Exq.Api.remove_scheduled(Exq.Api, connection.jid)
+    data
   end
 
   @spec key_map!(connections :: [%Connection{}]) :: %{String.t() => %Connection{}}
