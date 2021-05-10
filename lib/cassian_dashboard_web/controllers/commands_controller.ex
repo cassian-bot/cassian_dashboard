@@ -5,6 +5,8 @@ defmodule CassianDashboardWeb.CommandsController do
 
   defguardp real_provider(provider) when provider in ["spotify", "general", "youtube"]
 
+  # Controller stuff
+
   def index(conn, %{"provider" => provider}) when real_provider(provider) do
     IO.inspect(conn.assigns, label: "Assings")
     render(conn, "index.html",
@@ -18,6 +20,35 @@ defmodule CassianDashboardWeb.CommandsController do
   def index(conn, _) do
     render(conn, "index.html", [provider: "general", playlists: []] ++ provider_key_list(conn, "general"))
   end
+
+  @doc """
+  Get playlists for specific connections.
+  """
+  @spec get_playlist(conn :: %Plug.Conn{}, provider :: :spotify | any()) :: [
+    %{name: String.t(), link: String.t()}
+  ]
+  def get_playlist(conn, :spotify) do
+    user = current_user(conn)
+
+    case Connections.connection_for_account(user, "spotify") do
+      nil ->
+        []
+
+      connection ->
+        case SpotifyService.get_playlists(connection) do
+          {:ok, playlists} ->
+            Enum.map(playlists, fn p -> %{name: p.name, link: p.external_urls.spotify} end)
+
+          _ ->
+            []
+        end
+    end
+  end
+
+  def get_playlist(_conn, _), do: []
+
+  # Functions which generate classes for providers, really only has
+  # value with css, otherwise doesn't affect any data
 
   defp provider_key_list(conn, provider) do
     user = current_user(conn)
@@ -52,30 +83,4 @@ defmodule CassianDashboardWeb.CommandsController do
 
     Keyword.put(acc, :"#{provider}_classes", classes)
   end
-
-  @doc """
-  Get playlists for specific connections.
-  """
-  @spec get_playlist(conn :: %Plug.Conn{}, provider :: :spotify | any()) :: [
-          %{name: String.t(), link: String.t()}
-        ]
-  def get_playlist(conn, :spotify) do
-    user = current_user(conn)
-
-    case Connections.connection_for_account(user, "spotify") do
-      nil ->
-        []
-
-      connection ->
-        case SpotifyService.get_playlists(connection) do
-          {:ok, playlists} ->
-            Enum.map(playlists, fn p -> %{name: p.name, link: p.external_urls.spotify} end)
-
-          _ ->
-            []
-        end
-    end
-  end
-
-  def get_playlist(_conn, _), do: []
 end
