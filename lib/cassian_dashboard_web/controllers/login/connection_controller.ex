@@ -1,4 +1,4 @@
-defmodule CassianDashboardWeb.Login.SpotifyController do
+defmodule CassianDashboardWeb.Login.ConnectionController do
   use CassianDashboardWeb, :controller
 
   alias CassianDashboard.Connections
@@ -16,11 +16,18 @@ defmodule CassianDashboardWeb.Login.SpotifyController do
     |> redirect(to: "/")
   end
 
-  def callback(%{assigns: %{ueberauth_auth: auth}} = conn, _params) do
+  def callback(%{assigns: %{ueberauth_auth: auth}} = conn, params) do
+    params |> IO.inspect(label: "params")
+
     Guardian.Plug.current_resource(conn)
-    |> Connections.create_or_update(auth)
+    |> Connections.create_or_update(translate_auth(auth))
 
     conn
     |> redirect(to: "/")
   end
+
+  defp translate_auth(%{provider: :google} = auth),
+    do: Map.put(auth, :provider, :youtube)
+
+  defp translate_auth(auth), do: auth
 end

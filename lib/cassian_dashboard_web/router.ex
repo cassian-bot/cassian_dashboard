@@ -61,17 +61,17 @@ defmodule CassianDashboardWeb.Router do
     scope "/spotify" do
       pipe_through :ensure_auth
 
-      get "/", SpotifyController, :request
-      get "/callback", SpotifyController, :callback
-      post "/callback", SpotifyController, :callback
+      get "/", ConnectionController, :request
+      get "/callback", ConnectionController, :callback
+      post "/callback", ConnectionController, :callback
     end
 
     scope "/google" do
       pipe_through :ensure_auth
 
-      get "/", YoutubeController, :request
-      get "/callback", YoutubeController, :callback
-      post "/callback", YoutubeController, :callback
+      get "/", ConnectionController, :request
+      get "/callback", ConnectionController, :callback
+      post "/callback", ConnectionController, :callback
     end
   end
 
