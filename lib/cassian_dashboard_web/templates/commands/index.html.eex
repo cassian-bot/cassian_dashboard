@@ -29,7 +29,7 @@
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="logo-small">
               <image xlink:href="<%= Routes.static_path(@conn, "/svg/soundcloud-white.svg") %>" width="24px" height="24px" />
             </svg>
-            <span>Soundcloud</span>
+            <span>SoundCloud</span>
           </div>
         </a>
       </div>
