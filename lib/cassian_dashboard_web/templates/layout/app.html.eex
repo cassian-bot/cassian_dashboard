@@ -11,6 +11,13 @@
     <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/spop.css") %>">
     <script defer type="text/javascript" src="<%= Routes.static_path(@conn, "/js/app.js") %>"></script>
     <script defer type="text/javascript" src="<%= Routes.static_path(@conn, "/js/spop.js") %>"></script>
+    <meta property="og:title" content="Cassian" />
+    <meta property="og:type" content="Cassian" />
+    <meta property="og:image" content="https://raw.githubusercontent.com/cassian-bot/assets/master/cassian_dashboard_banner.png" />
+    <meta name="twitter:card" content="summary_large_image">
+    <meta property="og:description" content="Phoenix Dashboard for Cassian." />
+    <meta name="theme-color" content="#67d4e2">
+
   </head>
   <body>
     <header>
