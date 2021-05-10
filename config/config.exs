@@ -38,7 +38,9 @@ config :ueberauth, Ueberauth,
         default_scope: "playlist-read-private,user-library-read"
       ]
     },
-    google: {Ueberauth.Strategy.Google, []}
+    google: {Ueberauth.Strategy.Google, [
+      access_type: "offline"
+    ]}
   ]
 
 # Added here as we'll need it in both dev and prod

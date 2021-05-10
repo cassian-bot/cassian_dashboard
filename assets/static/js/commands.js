@@ -16,7 +16,7 @@ let unimplemented = () => {
     });
 }
 
-function setupButton(buttonName) {
+function setupButton(buttonName, actualProvider = undefined) {
     const button = document.getElementById(`${buttonName}-connection`);
 
     if (button.classList.contains("not-connected"))
@@ -30,10 +30,10 @@ function setupButton(buttonName) {
         else
             button.parentElement.href = `/auth/${buttonName}`;
     else
-        button.parentElement.href = `/commands?provider=${buttonName}`;
+        button.parentElement.href = `/commands?provider=${actualProvider || buttonName}`;
 }
 
-setupButton('youtube');
+setupButton('youtube', 'google');
 setupButton('spotify');
 setupButton('soundcloud');
 
