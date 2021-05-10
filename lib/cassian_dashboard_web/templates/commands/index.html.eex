@@ -10,7 +10,7 @@
         </a>
         <a href="">
           <div id="youtube-connection" class="category-element rounded-box connection youtube-connection <%= @youtube_classes %> <%= @all %>">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24px 24px" class="logo-small">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="logo-small">
               <image xlink:href="<%= Routes.static_path(@conn, "/svg/youtube-white.svg") %>" width="24px" height="24px" />
             </svg>
             <span>YouTube</span>
@@ -18,7 +18,7 @@
         </a>
         <a href="">
           <div id="spotify-connection" class="category-element rounded-box connection spotify-connection <%= @spotify_classes %> <%= @all %>">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0px 0px 24px 24px" class="logo-small">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="logo-small">
               <image xlink:href="<%= Routes.static_path(@conn, "/svg/spotify-white.svg") %>" width="24px" height="24px" />
             </svg>
             <span>Spotify</span>
@@ -26,7 +26,7 @@
         </a>
         <a href="">
           <div id="soundcloud-connection" class="category-element rounded-box connection soundcloud-connection <%= @soundcloud_classes %> <%= @all %>">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24px 24px" class="logo-small">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="logo-small">
               <image xlink:href="<%= Routes.static_path(@conn, "/svg/soundcloud-white.svg") %>" width="24px" height="24px" />
             </svg>
             <span>Soundcloud</span>

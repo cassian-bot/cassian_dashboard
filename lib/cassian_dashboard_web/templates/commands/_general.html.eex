@@ -1,11 +1,12 @@
 <%
   commands = [
+    %{name: "help", args: nil},
     %{name: "ping", args: nil},
     %{name: "backward", args: nil},
     %{name: "forward", args: nil},
     %{name: "next", args: nil},
-    %{name: "play", args: "song url", placeholder: true},
-    %{name: "playlist", args: nil},
+    %{name: "play", args: "song name or url", placeholder: true},
+    %{name: "playlist", args: "playlist url"},
     %{name: "previous", args: nil},
     %{name: "repeat", args: "one, none, all"},
     %{name: "shuffle", args: nil},
