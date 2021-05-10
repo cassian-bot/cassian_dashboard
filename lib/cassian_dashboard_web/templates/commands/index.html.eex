@@ -5,6 +5,9 @@
       <div class="menu-category rounded-box command-element-holder">
         <a href="/commands">
           <div class="category-element rounded-box connection general-connection <%= @general_classes %>">
+            <p class="circle-white">
+              <p class="circle-general"></p>
+            </p>
             <span>General</span>
           </div>
         </a>

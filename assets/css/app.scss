@@ -414,6 +414,25 @@ section {
     border-left: 5px solid;
 }
 
+.circle-white {
+    background-color: white;
+    width: 24px;
+    height: 24px;
+    position: absolute;
+    left: 20px;
+    border-radius: 50%;
+}
+
+.circle-general {
+    background-color: var(--general);
+    width: 14px;
+    height: 14px;
+    position: absolute;
+    left: 25px;
+    top: 15px;
+    border-radius: 50%;
+}
+
 .logo-small {
     position: absolute;
     left: 20px;
