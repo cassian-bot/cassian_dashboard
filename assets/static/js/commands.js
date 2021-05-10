@@ -28,7 +28,7 @@ function setupButton(buttonName) {
             button.parentElement.onclick = (event) => event.preventDefault();
         }
         else
-            button.parentElement.href = `/auth/${buttonName}`
+            button.parentElement.href = link || `/auth/${buttonName}`
     else
     button.parentElement.href = `/commands?provider=${buttonName}`;
 }

@@ -3,13 +3,11 @@ defmodule CassianDashboardWeb.CommandsController do
 
   alias CassianDashboard.{Connections, Services.SpotifyService}
 
-  defguardp real_provider(provider) when provider in ["spotify", "general", "youtube"]
+  defguardp real_provider(provider) when provider in ["spotify", "general", "youtube", "soundcloud"]
 
   # Controller stuff
 
   def index(conn, %{"provider" => provider}) when real_provider(provider) do
-    IO.inspect(conn.assigns, label: "Assings")
-
     render(
       conn,
       "index.html",
@@ -72,7 +70,6 @@ defmodule CassianDashboardWeb.CommandsController do
 
     ["spotify", "soundcloud", "youtube", "general"]
     |> Enum.reduce([all: all], &provider_class(&1, &2, connections, provider))
-    |> IO.inspect(label: "Classes")
   end
 
   defp provider_class(provider, acc, connections, current_provider) do
@@ -84,6 +81,8 @@ defmodule CassianDashboardWeb.CommandsController do
   end
 
   defp connection_class(_connections, "general"), do: []
+
+  defp connection_class(_connections, "soundcloud"), do: []
 
   defp connection_class(connections, provider) do
     if connections[provider] do
