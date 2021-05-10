@@ -25,6 +25,7 @@ defmodule CassianDashboard.MixProject do
         :runtime_tools,
         :ueberauth_discord,
         :ueberauth_spotify,
+        :ueberauth_google,
         :httpoison,
         :exq
       ]
@@ -53,6 +54,7 @@ defmodule CassianDashboard.MixProject do
       {:plug_cowboy, "~> 2.0"},
       {:ueberauth_discord, "~> 0.5.2"},
       {:ueberauth_spotify, "0.2.1"},
+      {:ueberauth_google, "~> 0.10"},
       {:guardian, "~> 2.0"},
       {:httpoison, "~> 1.8"},
       {:exq, "~> 0.14.0"}
