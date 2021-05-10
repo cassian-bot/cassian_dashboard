@@ -7,6 +7,7 @@ Phoenix Dashboard for [Cassian](https://github.com/cassian-bot/cassian).
 ## Table of contents
 
 - [Requirements](#requirements)
+- [Starting up](#starting-up)
 
 ### Requirements
 
