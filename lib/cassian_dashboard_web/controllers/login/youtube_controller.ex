@@ -18,7 +18,7 @@ defmodule CassianDashboardWeb.Login.YoutubeController do
 
   def callback(%{assigns: %{ueberauth_auth: auth}} = conn, _params) do
     Guardian.Plug.current_resource(conn)
-    |> Connections.create_or_update(auth |> IO.inspect(label: "Oauth Stuff"))
+    |> Connections.create_or_update(auth |> Map.put(:provider, :youtube))
 
     conn
     |> redirect(to: "/")

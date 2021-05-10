@@ -28,9 +28,9 @@ function setupButton(buttonName, actualProvider = undefined) {
             button.parentElement.onclick = (event) => event.preventDefault();
         }
         else
-            button.parentElement.href = `/auth/${buttonName}`;
+            button.parentElement.href = `/auth/${actualProvider || buttonName}`;
     else
-        button.parentElement.href = `/commands?provider=${actualProvider || buttonName}`;
+        button.parentElement.href = `/commands?provider=${buttonName}`;
 }
 
 setupButton('youtube', 'google');
