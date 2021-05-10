@@ -1,13 +1,19 @@
 @import url("https://fonts.googleapis.com/css2?family=Heebo:wght@100;300;400;500&display=swap");
 
 :root {
+    --nav: #191c1f;
+    --body: #212529;
     --main: #67d4e2;
     --blurple: #7289da;
     --dark-blurple: #4e5d94;
     --dark: #23272a;
-    --command-bg-color: #161718;
+    --command-bg-color: #1c1e20;
     --light-gray: #afb6b8;
     --dark-gray: #878c8d;
+    --general: #479fff;
+    --youtube: #ff3333;
+    --spotify: #3cb967;
+    --soundcloud: #ff9033;
 }
 
 * {
@@ -19,7 +25,7 @@
 }
 
 body {
-    background-color: #191c1f;
+    background-color: var(--body);
 }
 
 li,
@@ -37,6 +43,7 @@ header {
     align-items: center;
     padding: 20px 10%;
     text-transform: uppercase;
+    background-color: var(--nav);
 }
 
 .logo-header {
@@ -262,8 +269,12 @@ header {
 }
 
 @keyframes fadeIn {
-    0% { opacity: 0; }
-    100% { opacity: 1; }
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
 }
 
 /* Everything regarding the main landing page */
@@ -344,7 +355,7 @@ section {
 // Big containers
 
 .command-element-holder {
-    background-color: #161718;
+    background-color: var(--command-bg-color);
 }
 
 .commands-landing {
@@ -417,19 +428,19 @@ section {
 // Specific connections
 
 .general-connection {
-    background-color: #786cc7;
+    background-color: var(--general);
 }
 
 .youtube-connection {
-    background-color: red;
+    background-color: var(--youtube);
 }
 
 .spotify-connection {
-    background-color: #1db954;
+    background-color: var(--spotify);
 }
 
 .soundcloud-connection {
-    background-color: #ff7700;
+    background-color: var(--soundcloud);
 }
 
 // Playlists
@@ -469,7 +480,7 @@ section {
     padding-left: 20px;
     padding-right: 20px;
     color: var(--dark-gray);
-    font-size: 1.8em
+    font-size: 1.8em;
 }
 
 .menu-commands {

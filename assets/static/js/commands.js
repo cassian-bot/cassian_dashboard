@@ -1,36 +1,36 @@
 let authenticatedError = () => {
     spop({
         template: 'You need to be authenticated to perform this action!',
-        position  : 'top-right',
+        position: 'top-right',
         autoclose: 2000,
         style: 'error'
-    }); 
+    });
 }
 
 let unimplemented = () => {
     spop({
         template: 'Connection not yet implemented!',
-        position  : 'top-right',
+        position: 'top-right',
         autoclose: 2000,
         style: 'error'
-    }); 
+    });
 }
 
 function setupButton(buttonName) {
     const button = document.getElementById(`${buttonName}-connection`);
 
-    if(button.classList.contains("not-connected"))
+    if (button.classList.contains("not-connected"))
         if (button.classList.contains("unauthenticated")) {
             button.onclick = authenticatedError;
             button.parentElement.onclick = (event) => event.preventDefault();
-        } else if (buttonName != 'spotify') {
+        } else if (buttonName != "spotify") {
             button.onclick = unimplemented;
             button.parentElement.onclick = (event) => event.preventDefault();
         }
         else
-            button.parentElement.href = link || `/auth/${buttonName}`
+            button.parentElement.href = `/auth/${buttonName}`;
     else
-    button.parentElement.href = `/commands?provider=${buttonName}`;
+        button.parentElement.href = `/commands?provider=${buttonName}`;
 }
 
 setupButton('youtube');
@@ -63,11 +63,11 @@ const copyToClipboard = str => {
     document.execCommand('copy');
     document.body.removeChild(el);
 
-    
+
 
     spop({
         template: 'Coppied to clipboard!',
-        position  : 'top-right',
+        position: 'top-right',
         autoclose: 2000
     });
 
@@ -79,16 +79,16 @@ let initialValue = document.getElementById("command-input").value
 
 const elements = document.getElementsByClassName('placeholder');
 
-for(let i = 0; i < elements.length; i++) {
+for (let i = 0; i < elements.length; i++) {
     const element = elements.item(i)
     element.textContent = initialValue || element.getAttribute('placeholder');
 }
 
-document.getElementById("command-input").onkeyup = (event) => {    
-    for(let i = 0; i < elements.length; i++) {
+document.getElementById("command-input").onkeyup = (event) => {
+    for (let i = 0; i < elements.length; i++) {
         const element = elements.item(i)
 
-        if(event.target.value !== "")
+        if (event.target.value !== "")
             element.textContent = event.target.value;
         else
             element.textContent = element.getAttribute('placeholder');
