@@ -6,7 +6,7 @@
     %{name: "forward", args: nil},
     %{name: "next", args: nil},
     %{name: "play", args: "song name or url", placeholder: true},
-    %{name: "playlist", args: "playlist url"},
+    %{name: "playlist", args: "playlist url", placeholder: true},
     %{name: "previous", args: nil},
     %{name: "repeat", args: "one, none, all"},
     %{name: "shuffle", args: nil},
