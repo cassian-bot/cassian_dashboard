@@ -9,7 +9,10 @@ defmodule CassianDashboardWeb.CommandsController do
 
   def index(conn, %{"provider" => provider}) when real_provider(provider) do
     IO.inspect(conn.assigns, label: "Assings")
-    render(conn, "index.html",
+
+    render(
+      conn,
+      "index.html",
       [
         provider: provider,
         playlists: get_playlist(conn, provider |> String.to_atom())
@@ -18,15 +21,19 @@ defmodule CassianDashboardWeb.CommandsController do
   end
 
   def index(conn, _) do
-    render(conn, "index.html", [provider: "general", playlists: []] ++ provider_key_list(conn, "general"))
+    render(
+      conn,
+      "index.html",
+      [provider: "general", playlists: []] ++ provider_key_list(conn, "general")
+    )
   end
 
   @doc """
   Get playlists for specific connections.
   """
   @spec get_playlist(conn :: %Plug.Conn{}, provider :: :spotify | any()) :: [
-    %{name: String.t(), link: String.t()}
-  ]
+          %{name: String.t(), link: String.t()}
+        ]
   def get_playlist(conn, :spotify) do
     user = current_user(conn)
 
@@ -70,17 +77,24 @@ defmodule CassianDashboardWeb.CommandsController do
 
   defp provider_class(provider, acc, connections, current_provider) do
     classes =
-      if connections[provider] || provider == "general" do
-        []
-      else
-        ["not-connected"]
-      end ++ if current_provider == provider do
-        ["selected-connection"]
-      else
-        []
-      end
+      (connection_class(connections, provider) ++ selected_class(provider, current_provider))
       |> Enum.join(" ")
 
     Keyword.put(acc, :"#{provider}_classes", classes)
   end
+
+  defp connection_class(_connections, "general"), do: []
+
+  defp connection_class(connections, provider) do
+    if connections[provider] do
+      []
+    else
+      ["not-connected"]
+    end
+  end
+
+  defp selected_class(one, two) when one == two,
+    do: ["selected-connection"]
+
+  defp selected_class(_one, _two), do: []
 end
