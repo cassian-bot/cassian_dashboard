@@ -4,7 +4,6 @@
     --nav: #191c1f;
     --body: #212529;
     --scrollbar: #a7a8e9;
-    --scrollbar-bg: #292d31;
     --main: #67d4e2;
     --blurple: #7289da;
     --dark-blurple: #4e5d94;
@@ -27,7 +26,7 @@
 }
 
 html {
-    scrollbar-color: var(--scrollbar) var(--scrollbar-bg);
+    scrollbar-color: var(--scrollbar) transparent;
 }
 
 body {

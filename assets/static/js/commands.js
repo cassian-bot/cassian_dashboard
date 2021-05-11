@@ -24,6 +24,8 @@ setupButton('youtube', 'google');
 setupButton('spotify');
 setupButton('soundcloud');
 
+const commands = document.getElementsByClassName("command-box");
+
 document.addEventListener('click', event => {
     if (event.target.matches(".copy-button")) {
         copyToClipboard(getStringFromP(event.target))
@@ -31,6 +33,30 @@ document.addEventListener('click', event => {
         copyToClipboard(getStringFromP(event.target.parentElement));
     } else if (event.target.matches(".copy-path")) {
         copyToClipboard(getStringFromP(event.target.parentElement.parentElement));
+    } else if (event.target.matches(".command-category") && !event.target.matches(".selected-category")) {
+        const newCategory = event.target.textContent.toLowerCase().split(" ")[0];
+
+        let oldSelected;
+        if ((oldSelected = document.getElementsByClassName("selected-category")[0])) {
+            if (oldSelected == event.target) return;
+
+            oldSelected.classList.remove("selected-category");
+            event.target.classList.add("selected-category");
+        } else
+            event.target.classList.add("selected-category");
+
+        if (newCategory == "all")
+            for (let i = 0; i < commands.length; i++)
+                commands[i].style.display = 'flex';
+        else
+            for (let i = 0; i < commands.length; i++) {
+                let command = commands[i];
+
+                command.style.display =
+                    command.classList.contains(`${newCategory}-category`) ? 'flex' : 'none';
+            }
+
+
     }
 })
 
