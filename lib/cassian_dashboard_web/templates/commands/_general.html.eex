@@ -5,7 +5,7 @@
     command!(name: "backward"),
     command!(name: "forward"),
     command!(name: "next"),
-    command!(name: "play", placeholder: "song name or supported URL"),
+    command!(name: "play", placeholder: "song name or URL"),
     command!(name: "previous"),
     command!(name: "repeat", arg: "one"),
     command!(name: "repeat", arg: "none"),

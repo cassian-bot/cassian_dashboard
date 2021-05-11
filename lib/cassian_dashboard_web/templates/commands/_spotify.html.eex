@@ -1,8 +1,8 @@
 <%
   commands = [
-    command!(name: "playlist", arg: "import", placeholder: "Spotify playlist URL"),
-    command!(name: "playlist", arg: "play", placeholder: "Spotify playlist URL"),
-    command!(name: "play", placeholder: "Spotify song URL")
+    command!(name: "playlist", arg: "import", placeholder: "playlist URL"),
+    command!(name: "playlist", arg: "play", placeholder: "playlist URL"),
+    command!(name: "play", placeholder: "song URL")
   ]
 %>
 
