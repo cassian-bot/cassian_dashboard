@@ -37,8 +37,8 @@
         </a>
       </div>
       <div class="menu-category rounded-box command-categories command-element-holder">
-        <%= for x <- ["All commands", "Playback commands", "Test commands"] do %>
-          <p class="rounded-box category-element command-category"><%= x %></p>
+        <%= for x <- ["All", "Control", "Playlist", "Misc"] do %>
+          <p class="rounded-box category-element command-category"><%= "#{x} commands" %></p>
         <% end %>
       </div>
       <%= unless @provider == "general", do: render "_playlists.html", conn: @conn, connections: @connections, playlists: @playlists, provider: @provider %>
