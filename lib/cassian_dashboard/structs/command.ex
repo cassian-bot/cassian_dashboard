@@ -3,15 +3,12 @@ defmodule CassianDashboard.Structs.Command do
   Command struct used in the web view.
   """
 
-  @enforce_keys [
-    :name
-  ]
-
   defstruct [
     :name,
     :arg,
     :placeholder,
-    :description
+    :description,
+    :categories
   ]
 
   @typedoc """
@@ -21,39 +18,56 @@ defmodule CassianDashboard.Structs.Command do
           name: String.t() | nil,
           arg: String.t() | nil,
           placeholder: String.t() | nil,
-          description: String.t() | nil
+          description: String.t() | nil,
+          categories: [String.t()]
         }
 
-  @typedoc "The calling name of the command. It is enforced!"
+  @typedoc "The calling name of the command."
   @type name :: String.t()
 
   @typedoc "The argument of the command which isn't edited with the search bar,"
-  @type arg :: String.t() | nil
+  @type arg :: String.t()
 
   @typedoc "The plcaholder value which is edited in the search bar."
-  @type placeholder :: String.t() | nil
+  @type placeholder :: String.t()
 
   @typedoc "The description of the command."
-  @type description :: String.t() | nil
+  @type description :: String.t()
+
+  @typedoc "The categories under which the command falls"
+  @type categories :: String.t()
 
   @doc """
-  Get the command struct from a keyword list. Raises an error if required
-  fields are not present.
+  Get the command struct from a keyword list.
   """
   @spec command!(
           keylist :: [
             name: String.t(),
-            arg: String.t() | nil,
-            placeholder: String.t() | nil,
-            description: String.t() | nil
+            arg: String.t(),
+            placeholder: String.t(),
+            description: String.t(),
+            categories: String.t() | [String.t()]
           ]
-        ) :: %__MODULE__{} | ArgumentError
+        ) :: %__MODULE__{}
   def command!(keylist) do
     %__MODULE__{
       name: Keyword.get(keylist, :name),
       arg: Keyword.get(keylist, :arg),
       placeholder: Keyword.get(keylist, :placeholder),
-      description: Keyword.get(keylist, :description)
+      description: Keyword.get(keylist, :description),
+      categories: Keyword.get(keylist, :categories) |> as_list()
     }
   end
+
+  def category_classes(command) do
+    command.categories
+    |> Enum.map(fn category -> "#{category}-category" end)
+    |> Enum.join(" ")
+  end
+
+  defp as_list(argument) when is_list(argument) do
+    argument
+  end
+
+  defp as_list(argument), do: [argument]
 end

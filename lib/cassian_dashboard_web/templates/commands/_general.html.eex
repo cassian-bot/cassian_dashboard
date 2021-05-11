@@ -1,16 +1,17 @@
 <%
   commands = [
-    command!(name: "help"),
-    command!(name: "ping"),
-    command!(name: "backward"),
-    command!(name: "forward"),
-    command!(name: "next"),
-    command!(name: "play", placeholder: "song name or URL"),
-    command!(name: "previous"),
-    command!(name: "repeat", arg: "one"),
-    command!(name: "repeat", arg: "none"),
-    command!(name: "repeat", arg: "all"),
-    command!(name: "shuffle"),
+    command!(name: "help", categories: "misc"),
+    command!(name: "ping", categories: "misc"),
+    command!(name: "backward", categories: "control"),
+    command!(name: "forward", categories: "control"),
+    command!(name: "next", categories: "control"),
+    command!(name: "play", placeholder: "song name or URL", categories: ["control", "playlist"]),
+    command!(name: "previous", categories: "control"),
+    command!(name: "repeat", arg: "one", categories: "playlist"),
+    command!(name: "repeat", arg: "none", categories: "playlist"),
+    command!(name: "repeat", arg: "all", categories: "playlist"),
+    command!(name: "shuffle", categories: "playlist"),
+    command!(name: "unshuffle", categories: "playlist"),
   ]
 %>
 
