@@ -59,6 +59,17 @@ defmodule CassianDashboard.Structs.Command do
     }
   end
 
+  @doc """
+  Append `-category` on every category element and join them with an empty space.
+
+  This is used for HTML classes and JS to toggle them on and off.
+
+  ## Examples
+
+      iex> category_elements(%Command{categories: ["one", "two"]})
+      "one-category two-category"
+  """
+  @spec category_classes(command :: %__MODULE__{}) :: String.t()
   def category_classes(command) do
     command.categories
     |> Enum.map(fn category -> "#{category}-category" end)
