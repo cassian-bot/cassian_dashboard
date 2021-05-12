@@ -1,3 +1,5 @@
+// Specific error messages.
+
 let authenticatedError = () => {
     spop({
         template: 'You need to be authenticated to perform this action!',
@@ -24,86 +26,87 @@ setupButton('youtube', 'google');
 setupButton('spotify');
 setupButton('soundcloud');
 
+// Generally commands
+
 const commands = document.getElementsByClassName("command-box");
 
-document.addEventListener('click', event => {
-    if (event.target.matches(".copy-button")) {
-        copyToClipboard(getStringFromP(event.target))
-    } else if (event.target.matches(".copy-logo")) {
-        copyToClipboard(getStringFromP(event.target.parentElement));
-    } else if (event.target.matches(".copy-path")) {
-        copyToClipboard(getStringFromP(event.target.parentElement.parentElement));
-    } else if (event.target.matches(".command-category") && !event.target.matches(".selected-category")) {
-        const newCategory = event.target.textContent.toLowerCase().split(" ")[0];
+// Setup copy-clicking
 
+const copiedMessage = () => {
+    spop({
+        template: 'Coppied to clipboard!',
+        position: 'top-right',
+        autoclose: 2000
+    });
+}
+
+document.addEventListener('click', event => {
+    if (event.target.matches(".copy-button"))
+        copyToClipboard(getStringFromP(event.target))
+    else if (event.target.matches(".copy-logo"))
+        copyToClipboard(getStringFromP(event.target.parentElement));
+    else if (event.target.matches(".copy-path"))
+        copyToClipboard(getStringFromP(event.target.parentElement.parentElement));
+})
+
+function getStringFromP(p) {
+    return p.parentElement.innerText.trim();
+}
+
+const copyToClipboard = str => {
+    const temp = document.createElement('textarea');
+    temp.value = str;
+    temp.setAttribute('readonly', '');
+    temp.style.position = 'absolute';
+    temp.style.left = '-9999px';
+    document.body.appendChild(temp);
+    temp.select();
+    document.execCommand('copy');
+    document.body.removeChild(temp);
+    copiedMessage();
+};
+
+// Setup category clicking
+
+document.addEventListener('click', event => {
+    if (event.target.matches(".command-category") && !event.target.matches(".selected-category")) {
+        const newCategory = event.target.textContent.toLowerCase().split(" ")[0];
+    
         let oldSelected;
         if ((oldSelected = document.getElementsByClassName("selected-category")[0])) {
             if (oldSelected == event.target) return;
-
+    
             oldSelected.classList.remove("selected-category");
             event.target.classList.add("selected-category");
         } else
             event.target.classList.add("selected-category");
-
+    
         if (newCategory == "all")
             for (let i = 0; i < commands.length; i++)
                 commands[i].style.display = 'flex';
         else
             for (let i = 0; i < commands.length; i++) {
                 let command = commands[i];
-
+    
                 command.style.display =
                     command.classList.contains(`${newCategory}-category`) ? 'flex' : 'none';
             }
-
-
     }
 })
-
-function getStringFromP(p) {
-    const element = p.parentElement;
-    return element.innerText.trim();
-}
-
-const copyToClipboard = str => {
-    const el = document.createElement('textarea');
-    el.value = str;
-    el.setAttribute('readonly', '');
-    el.style.position = 'absolute';
-    el.style.left = '-9999px';
-    document.body.appendChild(el);
-    el.select();
-    document.execCommand('copy');
-    document.body.removeChild(el);
-
-
-
-    spop({
-        template: 'Coppied to clipboard!',
-        position: 'top-right',
-        autoclose: 2000
-    });
-
-};
 
 // In case of a placeholder
 
 let initialValue = document.getElementById("command-input").value
 
-const elements = document.getElementsByClassName('placeholder');
+const placeholders = document.getElementsByClassName('placeholder');
 
-for (let i = 0; i < elements.length; i++) {
-    const element = elements.item(i)
-    element.textContent = initialValue || element.getAttribute('placeholder');
+for (let i = 0; i < placeholders.length; i++) {
+    const placeholder = placeholders.item(i)
+    placeholder.textContent = initialValue || placeholder.getAttribute('placeholder');
 }
 
 document.getElementById("command-input").onkeyup = (event) => {
-    for (let i = 0; i < elements.length; i++) {
-        const element = elements.item(i)
-
-        if (event.target.value !== "")
-            element.textContent = event.target.value;
-        else
-            element.textContent = element.getAttribute('placeholder');
-    }
+    for (let i = 0, placeholder; i < placeholders.length; i++)
+        placeholders.item(i)
+            .textContent = event.target.value || placeholders.item(i).getAttribute('placeholder');
 }
