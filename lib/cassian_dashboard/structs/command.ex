@@ -39,6 +39,35 @@ defmodule CassianDashboard.Structs.Command do
 
   @doc """
   Get the command struct from a keyword list.
+
+  ## Examples
+
+      iex> command!(name: "Hello", arg: "World")
+      %Command{
+        arg: "World",
+        categories: ["misc"],
+        description: nil,
+        name: "Hello",
+        placeholder: nil
+      }
+
+      iex> command!(name: "Hello", categories: "general")
+      %Command{
+        arg: "World",
+        categories: ["general"],
+        description: nil,
+        name: "Hello",
+        placeholder: nil
+      }
+
+      iex> command!(name: "ASDF", categories: ["general", "one"])
+      %Command{
+        arg: "World",
+        categories: ["general", "one"],
+        description: nil,
+        name: "Hello",
+        placeholder: nil
+      }
   """
   @spec command!(
           keylist :: [
@@ -55,9 +84,28 @@ defmodule CassianDashboard.Structs.Command do
       arg: Keyword.get(keylist, :arg),
       placeholder: Keyword.get(keylist, :placeholder),
       description: Keyword.get(keylist, :description),
-      categories: Keyword.get(keylist, :categories) |> as_list()
+      categories: Keyword.get(keylist, :categories) |> category_list!()
     }
   end
+
+  #  Always get the needed category list:
+  #  * Pass if list.
+  #  * Turn to list if single element.
+  #  * Return ["misc"] if nil.
+  #
+  #  If the categories are NOT defined, then set it `misc` by default.
+  #
+  #  ## Examples
+  #      iex> category_list!(["one", "two"])
+  #
+  @spec category_list!(argument :: [String.t()] | String.t() | nil) :: [String.t()]
+  defp category_list!(argument) when is_list(argument) do
+    argument
+  end
+
+  defp category_list!(nil), do: ["misc"]
+
+  defp category_list!(argument), do: [argument]
 
   @doc """
   Append `-category` on every category element and join them with an empty space.
@@ -75,10 +123,4 @@ defmodule CassianDashboard.Structs.Command do
     |> Enum.map(fn category -> "#{category}-category" end)
     |> Enum.join(" ")
   end
-
-  defp as_list(argument) when is_list(argument) do
-    argument
-  end
-
-  defp as_list(argument), do: [argument]
 end
