@@ -1,8 +1,8 @@
 <%
   commands = [
-    %{name: "playlist", arg: "import", placeholder: "playlist url"},
-    %{name: "playlist", arg: "play", placeholder: "playlist url"},
-    %{name: "play", placeholder: "song url"}
+    command!(name: "playlist", arg: "import", placeholder: "playlist URL", categories: "playlist"),
+    command!(name: "playlist", arg: "play", placeholder: "playlist URL", categories: "playlist"),
+    command!(name: "play", placeholder: "song URL", categories: ["control", "playlist"])
   ]
 %>
 

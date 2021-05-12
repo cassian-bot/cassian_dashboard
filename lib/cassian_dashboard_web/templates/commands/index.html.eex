@@ -1,5 +1,5 @@
 <section class="small-top-margin">
-  <input id="command-input" type="text" class="command-element-holder command-input rounded-box shadow-light" placeholder="Song name/link or playlist url..."" value="<%= @conn.assigns[:placeholder] %>"> <!-- Some cool safe-assign magic, amirite? -->
+  <input id="command-input" type="text" class="command-element-holder command-input rounded-box shadow-light" placeholder="Song name/link or playlist URL...""/> <!-- Some cool safe-assign magic, amirite? -->
   <div class="commands-landing">
     <div class="menu-select">
       <div class="menu-category rounded-box command-element-holder">
@@ -37,8 +37,8 @@
         </a>
       </div>
       <div class="menu-category rounded-box command-categories command-element-holder">
-        <%= for x <- ["All commands", "Playback commands", "Test commands"] do %>
-          <p class="rounded-box category-element command-category"><%= x %></p>
+        <%= for x <- ["All", "Control", "Playlist", "Misc"] do %>
+          <p class="rounded-box category-element command-category"><%= "#{x} commands" %></p>
         <% end %>
       </div>
       <%= unless @provider == "general", do: render "_playlists.html", conn: @conn, connections: @connections, playlists: @playlists, provider: @provider %>
