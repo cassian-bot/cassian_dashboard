@@ -27,6 +27,9 @@ defmodule CassianDashboard.Workers.SpotifyWorker do
       {:ok, {:ok, _}} ->
         # Redo everything after 50 minutes.
         enqueue(connection)
+
+      _ ->
+        nil
     end
   end
 end
