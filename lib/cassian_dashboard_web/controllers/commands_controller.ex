@@ -3,7 +3,8 @@ defmodule CassianDashboardWeb.CommandsController do
 
   alias CassianDashboard.{Connections, Services.SpotifyService}
 
-  defguardp real_provider(provider) when provider in ["spotify", "general", "youtube", "soundcloud"]
+  defguardp real_provider(provider)
+            when provider in ["spotify", "general", "youtube", "soundcloud"]
 
   # Controller stuff
 
