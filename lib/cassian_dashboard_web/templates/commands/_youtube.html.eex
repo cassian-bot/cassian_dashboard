@@ -1,0 +1,9 @@
+<%
+  commands = [
+    command!(name: "playlist", arg: "import", placeholder: "playlist URL", categories: "playlist"),
+    command!(name: "playlist", arg: "play", placeholder: "playlist URL", categories: "playlist"),
+    command!(name: "play", placeholder: "song URL", categories: ["control", "playlist"])
+  ]
+%>
+
+<%= render_many commands, CassianDashboardWeb.CommandsView, "_command.html", as: :command %>
